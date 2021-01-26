@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Theme -->
+    <color name="colorPrimary">@color/uspBluePrimary100</color>
+    <color name="colorPrimaryDark">@color/uspBluePrimary100_transparent80</color>
+    <color name="colorAccent">@color/uspYellow</color>
+    <color name="colorAccentDark">@color/uspYellowDark</color>
+    <color name="colorAccentSecondary">@color/uspBluePrimary900</color>
+    <color name="colorAccentSecondary_transparent80">@color/uspBluePrimary900_transparent80</color>
+
+    <color name="navBarColor">@android:color/transparent</color>
+    <bool name="isWindowStatusBarLight">true</bool>
+
+    <!-- USP Theme -->
+    <color name="uspBluePrimary">#1094ab</color>
+    <color name="uspBluePrimary100">#b3e9f6</color>
+    <color name="uspBluePrimary100_transparent80">#ccb3e9f6</color>
+    <color name="uspBluePrimary800">#0b8092</color>
+    <color name="uspBluePrimary900">#025d67</color>
+    <color name="uspBluePrimary900_transparent80">#cc025d67</color>
+
+
+    <color name="uspBlueSecondary">#64c4d2</color>
+    <color name="uspBlueSecondaryDark">#2a93a1</color>
+    <color name="uspBlueSecondaryLight">#98f7ff</color>
+
+    <color name="uspYellow">#fcb421</color>
+    <color name="uspYellowDark">#c48500</color>
+    <color name="uspYellowLight">#ffe659</color>
+
+    <!-- Grayscale -->
+    <color name="white">#ffffff</color>
+    <color name="divider">#1F000000</color>
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_850">#303030</color>
+    <color name="gray_900">#212121</color>
+    <color name="black">#000000</color>
+    <color name="invisible">#00000000</color>
+
+    <color name="gray_background_dark">#121212</color>
+    <color name="gray_background_dark_transparent80">#cc121212</color>
+
+    <!-- Day Night: Text & Icons -->
+    <color name="text_dark_high_emphasis_day_night">#DE000000</color>
+    <color name="text_dark_medium_emphasis_day_night">#99000000</color>
+    <color name="text_dark_disabled_day_night">#61000000</color>
+
+    <color name="text_light_high_emphasis_day_night">#DEFFFFFF</color>
+    <color name="text_light_medium_emphasis_day_night">#99FFFFFF</color>
+    <color name="text_light_disabled_day_night">#61FFFFFF</color>
+    
+    <color name="icon_dark_active_day_night">@color/uspBluePrimary900</color>
+    <color name="icon_light_active_day_night">@color/uspBluePrimary100</color>
+
+    <!-- Constant: Text & Icons -->
+    <color name="text_dark_high_emphasis">#DE000000</color>
+    <color name="text_dark_medium_emphasis">#99000000</color>
+    <color name="text_dark_disabled">#61000000</color>
+
+    <color name="text_light_high_emphasis">#DEFFFFFF</color>
+    <color name="text_light_medium_emphasis">#99FFFFFF</color>
+    <color name="text_light_disabled">#61FFFFFF</color>
+
+    <color name="icon_dark_active">@color/uspBluePrimary800</color>
+    <color name="icon_dark_inactive">#99000000</color>
+    <color name="icon_dark_disabled">#61000000</color>
+
+    <color name="icon_light_active">@color/uspBluePrimary100</color>
+    <color name="icon_light_inactive">#99FFFFFF</color>
+    <color name="icon_light_disabled">#61FFFFFF</color>
+
+    <!-- UI Element Colors-->
+    <color name="app_card_background">@color/white</color>
+    <color name="app_card_profile_picture_background">@color/gray_200</color>
+    <color name="app_toolbar_color">@color/colorPrimaryDark</color>
+
+    <color name="bg_boleto_code_color">@color/gray_200</color>
+    <color name="bg_boleto_code_stroke_color">@color/invisible</color>
+    <!-- 05%0D ;;; 10%1A ;;; 15%26 ;;; 20%33 ;;; 30%4D ;;; 40%66 ;;; 50%80 ;;; 60%9A ;;; 70%B3 -->
+    <color name="toolbarIconBackgroundTint">#26025d67</color> <!-- 70% white -->
+
+</resources>

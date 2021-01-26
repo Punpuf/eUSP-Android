@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dailyMenuLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:id="@+id/dailyMenuLinearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/dailyMenuLunchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:id="@+id/dailyMenuLunchTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/padding_normal"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccentSecondary"
+                android:text="@string/bandejao_lunch"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body1"
+                android:id="@+id/dailyMenuLunchContentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:paddingBottom="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/padding_normal"
+                tools:text="@tools:sample/lorem/random"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/dailyMenuDinnerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:id="@+id/dailyMenuDinnerTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/padding_normal"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccentSecondary"
+                android:text="@string/bandejao_dinner"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body1"
+                android:id="@+id/dailyMenuDinnerContentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/card_internal_margin_vertical"
+                android:textIsSelectable="true"
+                android:layout_marginHorizontal="@dimen/padding_normal"
+                tools:text="@tools:sample/lorem/random"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/card_external_margin_vertical"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

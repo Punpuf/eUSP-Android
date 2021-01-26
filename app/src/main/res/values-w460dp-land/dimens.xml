@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_external_margin_horizontal">64dp</dimen>
+    <dimen name="toolbar_icon_margin_horizontal">16dp</dimen>
+
+    <dimen name="restaurant_info_margin_end">72dp</dimen>
+    <string name="restaurant_info_img_ratio">4:1</string>
+</resources>

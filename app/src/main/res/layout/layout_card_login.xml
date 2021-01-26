@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppNormalCardStyle"
+    android:layout_marginTop="0dp"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:maxWidth="@dimen/card_width_max"
+    tools:visibility="visible">
+
+    <TextView
+        style="@style/AppCardTextTitleStyle"
+        android:id="@+id/loginCardTitleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_internal_margin_vertical"
+        android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+        android:text="@string/card_login_title"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        style="@style/App.TextAppearance.Body1"
+        android:id="@+id/loginCardDescriptionTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+        android:text="@string/login_card_description"/>
+
+   <com.google.android.material.button.MaterialButton
+       style="@style/Widget.App.Button.Contained"
+       android:id="@+id/loginCardButton"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/spacing_micro"
+       android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+       android:text="@string/card_login_button"
+       app:icon="@drawable/ic_baseline_login"
+       tools:targetApi="lollipop" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/card_internal_margin_vertical"/>
+
+
+</LinearLayout>

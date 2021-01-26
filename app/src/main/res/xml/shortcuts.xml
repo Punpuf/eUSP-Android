@@ -1,0 +1,32 @@
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="barcode"
+        android:enabled="true"
+        android:icon="@drawable/ic_barcode"
+        android:shortcutShortLabel="@string/shortcut_barcode_label"
+        android:shortcutDisabledMessage="@string/shortcut_code_disabled_msg"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.punpuf.e_bandejao"
+            android:targetClass="com.punpuf.e_bandejao.ui.MainActivity"
+            android:data="action_barcode"/>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="qrcode"
+        android:enabled="true"
+        android:icon="@drawable/ic_qrcode"
+        android:shortcutShortLabel="@string/shortcut_qrcode_label"
+        android:shortcutDisabledMessage="@string/shortcut_code_disabled_msg"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.punpuf.e_bandejao"
+            android:targetClass="com.punpuf.e_bandejao.ui.MainActivity"
+            android:data="action_qrcode"/>
+    </shortcut>
+
+</shortcuts>

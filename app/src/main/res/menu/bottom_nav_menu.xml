@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bandejaoFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_restaurant_menu"
+        android:title="@string/btm_nav_restaurant"/>
+    <item
+        android:id="@+id/saldoFragment"
+        android:enabled="true"
+        android:icon="@drawable/selector_btm_nav_ic_monetization_on"
+        android:title="@string/btm_nav_account_balance"/>
+    <item
+        android:id="@+id/cardFragment"
+        android:enabled="true"
+        android:icon="@drawable/selector_btm_nav_ic_account_box"
+        android:title="@string/btm_nav_eCard"/>
+
+    <!--<item
+        android:id="@+id/libraryFragment"
+        android:enabled="true"
+        android:icon="@drawable/selector_btm_nav_ic_menu_book"
+        android:title="@string/btm_nav_library"/>-->
+
+</menu>

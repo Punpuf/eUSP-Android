@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bandejaoCoordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bandejaoAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/bandejaoToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp">
+
+            <TextView
+                style="@style/AppCardMainToolbarStyle"
+                android:id="@+id/bandejaoTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bandejao_title"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/AppCardToolbarIconBtnStyle"
+                android:id="@+id/bandejaoToolbarSettingsBtn"
+                android:layout_marginHorizontal="@dimen/card_external_margin_horizontal"
+                android:layout_gravity="end|center_vertical"
+                android:contentDescription="@string/toolbar_settings_btn_description"
+                android:visibility="visible"
+                app:icon="@drawable/ic_settings" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Current Restaurant Display/Selector Btn -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardClickableRoundedStyle"
+            android:id="@+id/bandejaoSelectRestaurantLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginHorizontal="@dimen/card_external_margin_horizontal"
+            android:background="@drawable/bg_card_surface_rounded"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/bandejaoSelectRestaurantDropdownIv"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_dropdown"
+                android:contentDescription="@string/bandejao_dropdown_description"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                app:tint="@color/colorAccentSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body1"
+                android:id="@+id/bandejaoSelectRestaurantNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bandejaoSelectRestaurantDropdownIv"
+                tools:text="Restaurante Área 1"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body2"
+                android:id="@+id/bandejaoSelectRestaurantCampusNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:paddingBottom="@dimen/spacing_normal"
+                app:layout_constraintTop_toBottomOf="@id/bandejaoSelectRestaurantNameTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bandejaoSelectRestaurantDropdownIv"
+                tools:text="USP São Carlos (CAASO)"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/bandejaoTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_micro"
+            android:minHeight="48dp"
+            app:tabMode="scrollable"
+            app:tabContentStart="@dimen/card_external_margin_horizontal"
+            app:tabTextAppearance="@style/AppTabTextStyle"
+            app:tabTextColor="@color/colorAccentSecondary"
+            app:tabSelectedTextColor="@color/colorAccentSecondary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_collapseMode="pin"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccentSecondary_transparent80"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/bandejaoViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

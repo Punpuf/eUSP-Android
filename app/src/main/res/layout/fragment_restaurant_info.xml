@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/restaurantInfoLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints"
+    tools:background="@color/colorPrimary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/restaurantInfoAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/restaurantInfoToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppToolbarStyle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/App.TextAppearance.Body1"
+                    android:id="@+id/restaurantInfoNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccentSecondary"
+                    tools:text="Restaurante Area 1"
+                    tools:layout_marginStart="56dp"/>
+
+                <TextView
+                    style="@style/App.TextAppearance.Body2"
+                    android:id="@+id/restaurantInfoCampusTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_micro"
+                    android:layout_gravity="start"
+                    tools:text="USP Sao Carlos"
+                    tools:layout_marginStart="56dp"/>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/restaurantInfoNestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/restaurantInfoThumbnailIv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/padding_normal"
+                android:layout_marginStart="@dimen/restaurant_info_keyline"
+                android:layout_marginEnd="@dimen/restaurant_info_margin_end"
+                android:contentDescription="@string/restaurant_info_thumbnail_description"
+                android:scaleType="centerCrop"
+                android:background="@color/app_card_background"
+                android:elevation="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="@string/restaurant_info_img_ratio"/>
+
+            <!-- Horários -->
+            <TextView
+                style="@style/RestaurantInfoTitleStyle"
+                android:id="@+id/restaurantInfoHoursTitleTv"
+                android:text="@string/restaurant_info_hours_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoThumbnailIv" />
+
+            <TextView
+                style="@style/RestaurantInfoContentStyle"
+                android:id="@+id/restaurantInfoHoursContentTv"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoHoursTitleTv"
+                tools:text="Segunda a Sexta: 11:30 às 14:00; 17:30 às 19:00\nSábado: 11:00 às 13:00"/>
+
+            <ImageView
+                style="@style/RestaurantInfoIconStyle"
+                android:src="@drawable/ic_access_time_baseline"
+                android:contentDescription="@string/restaurant_info_hours_title"
+                app:layout_constraintTop_toTopOf="@id/restaurantInfoHoursTitleTv"/>
+
+            <!-- Localização -->
+            <TextView
+                style="@style/RestaurantInfoTitleStyle"
+                android:id="@+id/restaurantInfoLocationTitleTv"
+                android:text="@string/restaurant_info_location_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoHoursContentTv" />
+
+            <TextView
+                style="@style/RestaurantInfoContentStyle"
+                android:id="@+id/restaurantInfoLocationContentTv"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoLocationTitleTv"
+                tools:text="Av. Trabalhador São-carlense, 400, Parque Arnold Schimidt, São Carlos - SP" />
+
+            <ImageView
+                style="@style/RestaurantInfoIconStyle"
+                android:src="@drawable/ic_location_on_baseline"
+                android:contentDescription="@string/restaurant_info_location_title"
+                app:layout_constraintTop_toTopOf="@id/restaurantInfoLocationTitleTv"/>
+
+            <!-- Pontos de venda -->
+            <TextView
+                style="@style/RestaurantInfoTitleStyle"
+                android:id="@+id/restaurantInfoCashierTitleTv"
+                android:text="@string/restaurant_info_selling_point_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoLocationContentTv" />
+
+            <TextView
+                style="@style/RestaurantInfoContentStyle"
+                android:id="@+id/restaurantInfoCashierContentTv"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoCashierTitleTv"
+                tools:text="Segunda a Sexta - 11h as 14h e das 17h as 19h\nAv. Arlindo Bettio, nº 1000 - Ermalino Matarazzo - São Paulo \n CEP 03828-000 - Prédio I 1- Sala T 55 (-23.4816730 -46.5010620)\n\nSegunda a Sexta - 11h as 14h e das 17h as 19h\nAv. Arlindo Bettio, nº 1000 - Ermalino Matarazzo - São Paulo \n CEP 03828-000 - Prédio I 1- Sala T 55 (-23.4816730 -46.5010620)" />
+
+            <ImageView
+                style="@style/RestaurantInfoIconStyle"
+                android:src="@drawable/ic_storefront_baseline"
+                android:contentDescription="@string/restaurant_info_selling_point_title"
+                app:layout_constraintTop_toTopOf="@id/restaurantInfoCashierTitleTv"/>
+
+            <!-- Telefone -->
+            <TextView
+                style="@style/RestaurantInfoTitleStyle"
+                android:id="@+id/restaurantInfoPhoneTitleTv"
+                android:text="@string/restaurant_info_phone_title"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoCashierContentTv" />
+
+            <TextView
+                style="@style/RestaurantInfoContentStyle"
+                android:id="@+id/restaurantInfoPhoneContentTv"
+                app:layout_constraintTop_toBottomOf="@id/restaurantInfoPhoneTitleTv"
+                tools:text="(16) 3373-3907" />
+
+            <ImageView
+                style="@style/RestaurantInfoIconStyle"
+                android:src="@drawable/ic_phone_baseline"
+                android:contentDescription="@string/restaurant_info_phone_title"
+                app:layout_constraintTop_toTopOf="@id/restaurantInfoPhoneTitleTv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

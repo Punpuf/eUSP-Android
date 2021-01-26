@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Theme -->
+    <color name="colorPrimary">@color/gray_background_dark</color>
+    <color name="colorPrimaryDark">@color/gray_background_dark_transparent80</color>
+    <color name="colorAccent">@color/uspYellow</color>
+    <color name="colorAccentSecondary">@color/uspBluePrimary100</color>
+
+    <bool name="isWindowStatusBarLight">false</bool>
+
+    <!-- Day Night: Text & Icons -->
+    <color name="text_dark_high_emphasis_day_night">#DEFFFFFF</color>
+    <color name="text_dark_medium_emphasis_day_night">#99FFFFFF</color>
+
+    <color name="text_light_high_emphasis_day_night">#DE000000</color>
+    <color name="text_light_medium_emphasis_day_night">#99000000</color>
+
+    <color name="icon_dark_active_day_night">@color/uspBluePrimary100</color>
+    <color name="icon_light_active_day_night">@color/uspBluePrimary900</color>
+
+    <!-- UI Element Colors-->
+    <color name="app_card_background">#1c2424</color> <!-- #1c1c1c 1dp, #1c2424 1dp branded-->
+    <color name="app_card_profile_picture_background">@color/gray_300</color>
+    <color name="app_toolbar_color">@color/colorPrimary</color>
+
+    <color name="bg_boleto_code_color">@color/invisible</color>
+    <color name="bg_boleto_code_stroke_color">@color/colorAccentSecondary</color>
+
+    <color name="toolbarIconBackgroundTint">#33FFFFFF</color> <!-- 20% white -->
+
+</resources>

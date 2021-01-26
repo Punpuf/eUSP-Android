@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bandejaoFragment">
+
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="com.punpuf.e_bandejao.ui.CardFragment"
+        android:label="CardFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="http://localhost:50226/Site" />
+        <action
+            android:id="@+id/action_cardFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_cardFragment_to_codeDisplayDialogFragment"
+            app:destination="@id/codeDisplayDialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.punpuf.e_bandejao.ui.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login" />
+    <dialog
+        android:id="@+id/codeDisplayDialogFragment"
+        android:name="com.punpuf.e_bandejao.ui.CodeDisplayDialogFragment"
+        android:label="CodeDisplayDialogFragment" >
+        <argument
+            android:name="codeType"
+            app:argType="com.google.zxing.BarcodeFormat" />
+        <argument
+            android:name="code"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/bandejaoFragment"
+        android:name="com.punpuf.e_bandejao.ui.BandejaoFragment"
+        android:label="BandejaoFragment" >
+        <action
+            android:id="@+id/action_bandejaoFragment_to_restaurantListFragment"
+            app:destination="@id/restaurantListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saldoFragment"
+        android:name="com.punpuf.e_bandejao.ui.SaldoFragment"
+        android:label="SaldoFragment" >
+        <action
+            android:id="@+id/action_saldoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_saldoFragment_to_codeDisplayDialogFragment"
+            app:destination="@id/codeDisplayDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantListFragment"
+        android:name="com.punpuf.e_bandejao.ui.RestaurantListFragment"
+        android:label="RestaurantListFragment">
+        <action
+            android:id="@+id/action_restaurantListFragment_to_restaurantInfoFragment"
+            app:destination="@id/restaurantInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantInfoFragment"
+        android:name="com.punpuf.e_bandejao.ui.RestaurantInfoFragment"
+        android:label="RestaurantInfoFragment" >
+        <argument
+            android:name="restaurant"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.punpuf.e_bandejao.ui.LibraryFragment"
+        android:label="LibraryFragment" >
+        <action
+            android:id="@+id/action_libraryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>

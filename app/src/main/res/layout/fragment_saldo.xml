@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/saldoNestedScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/saldoToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppCardMainToolbarStyle"
+                android:id="@+id/saldoAccountBalanceTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/saldo_title"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/AppCardToolbarIconBtnStyle"
+                android:id="@+id/saldoToolbarRefreshBtn"
+                android:layout_marginEnd="@dimen/padding_normal"
+                android:contentDescription="@string/toolbar_refresh_btn_description"
+                android:visibility="visible"
+                app:icon="@drawable/ic_refresh" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/AppCardToolbarIconBtnStyle"
+                android:id="@+id/saldoToolbarSettingsBtn"
+                android:layout_marginEnd="@dimen/card_external_margin_horizontal"
+                android:contentDescription="@string/toolbar_settings_btn_description"
+                android:visibility="visible"
+                app:icon="@drawable/ic_settings" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/saldoDepositLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:id="@+id/saldoDepositTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:textSize="20sp"
+                android:text="@string/saldo_deposit_title"
+                android:textColor="@color/colorAccentSecondary"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                app:hintEnabled="false"
+                app:errorEnabled="false"
+                app:boxStrokeColor="@color/text_field_box_stroke_color"
+                app:boxBackgroundColor="@color/app_card_background"
+                app:prefixText="R$ "
+                app:prefixTextAppearance="@style/BoletoDepositInputTextStyle"
+                app:prefixTextColor="@color/text_dark_high_emphasis_day_night"
+                app:helperText="@string/saldo_deposit_input_range"
+                app:helperTextTextColor="@color/text_dark_medium_emphasis_day_night">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/BoletoDepositInputTextStyle"
+                    android:id="@+id/saldoDepositEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_normal"
+                    android:padding="0dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:inputType="numberDecimal"
+                    android:text="@string/saldo_deposit_edit_text_init" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.App.Button.Contained"
+                android:id="@+id/saldoDepositSubmitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_marginTop="@dimen/padding_normal"
+                android:layout_marginBottom="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/saldo_deposit_button"
+                app:icon="@drawable/ic_baseline_add"/>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/saldoBoletoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:id="@+id/saldoBoletoTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/saldo_boleto_ongoing"
+                android:textColor="@color/colorAccentSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body1"
+                android:id="@+id/saldoBoletoExpirationDateTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:textColor="@color/text_dark_medium_emphasis_day_night"
+                android:minLines="1"
+                app:layout_constraintTop_toBottomOf="@id/saldoBoletoTitleTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Vencimento em 30/08/2020"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body2"
+                android:id="@+id/saldoBoletoCodeTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:textColor="@color/text_dark_high_emphasis_day_night"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:textIsSelectable="true"
+                android:background="@drawable/bg_boleto_code"
+                android:padding="@dimen/padding_normal"
+                app:layout_constraintTop_toBottomOf="@id/saldoBoletoExpirationDateTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="00190.00009\n02844.474003\n00424.603173 1\n84330000002521"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.App.Button.Contained"
+                android:id="@+id/saldoBoletoCopyCodeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/card_internal_margin_vertical"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/saldo_boleto_copy_code"
+                app:icon="@drawable/ic_baseline_content_copy"
+                app:layout_constraintTop_toBottomOf="@id/saldoBoletoCodeTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.App.Button.Outlined"
+                android:id="@+id/saldoBoletoDeleteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/saldo_boleto_delete"
+                app:icon="@drawable/ic_baseline_delete_outline"
+                app:layout_constraintTop_toBottomOf="@id/saldoBoletoCopyCodeBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/saldoLoginCardConstraintLayout"
+            layout="@layout/layout_card_login" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

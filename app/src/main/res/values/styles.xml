@@ -1,0 +1,196 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/isWindowStatusBarLight</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:navigationBarColor">@color/navBarColor</item>
+        <item name="tabStyle">@style/Widget.App.TabLayout</item>
+    </style>
+
+    <style name="AppDisplayCardStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">@dimen/card_external_margin_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/card_external_margin_vertical</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:maxWidth">@dimen/card_width_max</item>
+        <item name="android:background">@drawable/bg_card_display</item>
+        <item name="android:elevation">1dp</item>
+    </style>
+
+    <style name="AppNormalCardStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">@dimen/card_external_margin_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/card_external_margin_vertical</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/bg_card_normal</item>
+        <item name="android:elevation">1dp</item>
+    </style>
+
+    <style name="AppNormalCardClickableStyle" parent="AppNormalCardStyle">
+        <item name="android:foreground">@drawable/bg_card_clickable</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="AppNormalCardClickableRoundedStyle" parent="AppNormalCardStyle">
+        <item name="android:foreground">@drawable/bg_card_clickable_rounded</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="AppDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:maxWidth">@dimen/code_dialog_max_width</item>
+        <item name="android:maxHeight">@dimen/code_dialog_max_width</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="OverlayRoundedButton">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AppCardTextTitleStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+    </style>
+
+    <style name="App.TextAppearance.Body1.Colored" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
+    </style>
+
+    <style name="App.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/text_dark_high_emphasis_day_night</item>
+    </style>
+
+    <style name="App.TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/text_dark_medium_emphasis_day_night</item>
+    </style>
+
+
+    <style name="AppCardMainToolbarStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+        <item name="android:paddingStart">@dimen/card_external_margin_horizontal</item>
+        <item name="android:paddingEnd">@dimen/card_external_margin_horizontal</item>
+    </style>
+
+    <style name="AppCardSimpleToolbarStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+    </style>
+
+    <style name="AppCardToolbarIconBtnStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton.Icon">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">end|center_vertical</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="backgroundTint">@color/toolbarIconBackgroundTint</item>
+        <item name="iconTint">@color/icon_dark_active_day_night</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="shapeAppearance">@style/OverlayRoundedButton</item>
+        <item name="rippleColor">@color/colorAccentSecondary</item>
+    </style>
+
+    <style name="BoletoDepositInputTextStyle">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/text_dark_high_emphasis_day_night</item>
+    </style>
+
+    <style name="AppToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorAccentSecondary</item>
+    </style>
+    
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+        <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/colorAccentSecondary</item>
+        <item name="colorSurface">@color/colorPrimary</item>
+        <item name="colorOnSurface">@color/colorAccentSecondary</item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="tabTextColor">@color/colorAccentSecondary</item>
+        <item name="tabSelectedTextColor">@color/colorAccentSecondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
+    <style name="AppTabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/- Button Styles -/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <style name="Widget.App.Button.Contained" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_dark_high_emphasis</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="iconTint">@color/text_dark_high_emphasis</item>
+        <item name="iconGravity">textStart</item>
+        <item name="cornerRadius">@dimen/surface_clickable_radius</item>
+    </style>
+
+    <style name="Widget.App.Button.Outlined" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+        <item name="iconTint">@color/colorAccentSecondary</item>
+        <item name="strokeColor">@color/colorAccentSecondary</item>
+        <item name="rippleColor">@color/colorAccentSecondary</item>
+        <item name="iconGravity">textStart</item>
+        <item name="cornerRadius">@dimen/surface_clickable_radius</item>
+    </style>
+
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/- RESTAURANT INFO -/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+
+    <style name="RestaurantInfoTitleStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_normal</item>
+        <item name="android:layout_marginStart">@dimen/restaurant_info_keyline</item>
+        <item name="android:layout_marginEnd">@dimen/restaurant_info_margin_end</item>
+        <item name="android:textColor">@color/colorAccentSecondary</item>
+        <item name="android:drawablePadding">@dimen/spacing_micro</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+    <style name="RestaurantInfoContentStyle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/spacing_normal</item>
+        <item name="android:paddingStart">@dimen/restaurant_info_keyline</item>
+        <item name="android:paddingEnd">@dimen/restaurant_info_margin_end</item>
+        <item name="android:textColor">@color/text_dark_medium_emphasis_day_night</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="android:textIsSelectable">true</item>
+    </style>
+
+    <style name="RestaurantInfoIconStyle">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginStart">@dimen/spacing_micro</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_micro</item>
+        <item name="android:scaleType">center</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+</resources>

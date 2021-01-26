@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:targetApi="lollipop">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardMainLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <!-- -/-/-/-/- TOOLBAR -/-/-/-/- -->
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/cardToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_toolbar_color"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/AppCardMainToolbarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/app_name"
+                android:textSize="28sp" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/AppCardToolbarIconBtnStyle"
+                android:id="@+id/cardToolbarSettingsBtn"
+                android:layout_marginEnd="@dimen/card_external_margin_horizontal"
+                android:contentDescription="@string/toolbar_settings_btn_description"
+                app:icon="@drawable/ic_settings" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/AppCardToolbarIconBtnStyle"
+                android:id="@+id/cardToolbarProfileSwapBtn"
+                android:layout_marginEnd="@dimen/padding_normal"
+                android:contentDescription="@string/toolbar_profile_change_btn_description"
+                android:visibility="gone"
+                app:icon="@drawable/ic_swap_horiz"
+                tools:visibility="visible" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <!-- -/-/-/-/- E-CARD /-/-/-/-/- -->
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppDisplayCardStyle"
+            android:id="@+id/cardEcardLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginTop="0dp"
+            android:maxWidth="400dp"
+            app:layout_constraintWidth_max="400dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardToolbar"
+            tools:targetApi="lollipop">
+
+            <!-- User profile -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cardEcardProfilePicIv"
+                android:layout_width="@dimen/ecard_profile_picture_width"
+                android:layout_height="0dp"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/card_ecard_profile_pic_content_description"
+                android:scaleType="centerCrop"
+                android:src="@color/app_card_profile_picture_background"
+                app:layout_constraintDimensionRatio="3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Gradient Yellow Background -->
+            <View
+                android:id="@+id/cardEcardGradientBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/card_card_gradient_yellow"
+                app:layout_constraintBottom_toBottomOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- USP logo -->
+            <ImageView
+                android:id="@+id/cardEcardUspLogoIv"
+                android:layout_width="@dimen/ecard_usp_logo_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_normal"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/card_ecard_usp_logo_content_description"
+                android:src="@drawable/ic_usp_logo_simple"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+            <!-- Uni name -->
+            <TextView
+                android:id="@+id/cardEcardUspLogoSubtitleTv"
+                style="@style/App.TextAppearance.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/card_ecard_usp_logo_subtitle"
+                android:textColor="@color/text_dark_high_emphasis"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardUspLogoIv" />
+
+            <!-- user type -->
+            <TextView
+                android:id="@+id/cardEcardUserTypeTv"
+                style="@style/App.TextAppearance.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_dark_high_emphasis"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardProfilePicIv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardUspLogoSubtitleTv"
+                tools:text="ALUNO" />
+
+            <!-- Yellow Stripe -->
+            <View
+                android:id="@+id/cardEcardColorStripe1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/ecard_color_stripe_long_height"
+                android:background="@color/uspYellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardProfilePicIv" />
+
+            <!-- Light Blue Stripe -->
+            <View
+                android:id="@+id/cardEcardColorStripe2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/ecard_color_stripe_short_height"
+                android:background="@color/uspBlueSecondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardColorStripe1" />
+
+            <!-- Dark Blue Stripe -->
+            <View
+                android:id="@+id/cardEcardColorStripe3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/ecard_color_stripe_short_height"
+                android:background="@color/uspBluePrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardColorStripe2" />
+
+            <!-- user name -->
+            <TextView
+                android:id="@+id/cardEcardUserNameTv"
+                style="@style/App.TextAppearance.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:layout_marginVertical="@dimen/spacing_normal"
+                android:layout_marginTop="4dp"
+                android:minLines="1"
+                android:textColor="@color/text_dark_high_emphasis_day_night"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardColorStripe3"
+                tools:text="Josualdo Ribeiro Guilhermino Magalhães Oliveira Roberto Silveira" />
+
+            <!-- user department-->
+            <TextView
+                android:id="@+id/cardEcardUserDepartmentTv"
+                style="@style/App.TextAppearance.Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:layout_marginVertical="@dimen/spacing_normal"
+                android:minLines="1"
+                android:textColor="@color/text_dark_high_emphasis_day_night"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardUserExpirationDateTv"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardUserNameTv"
+                tools:text="Escola de Engenharia de São Carlos" />
+
+            <!-- user sub-type-->
+            <TextView
+                android:id="@+id/cardEcardUserGroupTv"
+                style="@style/App.TextAppearance.Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:minLines="1"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:textAllCaps="true"
+                android:textColor="@color/text_dark_high_emphasis_day_night"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/cardEcardUserExpirationDateTv"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEcardUserDepartmentTv"
+                tools:text="Graduação" />
+
+            <!-- expiration date -->
+            <TextView
+                android:id="@+id/cardEcardUserExpirationDateTv"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:minLines="1"
+                android:textColor="@color/text_dark_medium_emphasis_day_night"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Validade\n06/2025" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <!-- -/-/-/-/ LOGIN CARD -/-/-/- -->
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <include
+            layout="@layout/layout_card_login"
+            android:id="@+id/cardLoginLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/card_external_margin_vertical"
+            app:layout_constraintWidth_max="400dp"
+            app:layout_constraintStart_toStartOf="@id/cardEcardLayout"
+            app:layout_constraintEnd_toEndOf="@+id/cardEcardLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardEcardLayout"
+            tools:visibility="visible" />
+
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <!-- -/-/-/- QR CODE CARD /-/-/- -->
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardQrcodeLayout"
+            style="@style/AppNormalCardClickableStyle"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:layout_constraintEnd_toStartOf="@+id/cardBarcodeLayout"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/cardEcardLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardLoginLayout"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/cardQrcodeQrcodeIv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/padding_normal"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginVertical="0dp"
+                android:adjustViewBounds="true"
+                android:background="@color/gray_300"
+                android:contentDescription="@string/card_qrcode_content_description"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/qrcode" />
+
+            <TextView
+                android:id="@+id/cardQrcodeTitleTv"
+                style="@style/AppCardTextTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="@string/card_qrcode_title"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardQrcodeQrcodeIv"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/cardQrcodeStatusTv"
+                style="@style/App.TextAppearance.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/text_dark_medium_emphasis_day_night"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardQrcodeTitleTv"
+                tools:text="Dados válidos\nExpira hoje às 23:59" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <!-- -/-/-/- BARCODE CARD /-/-/- -->
+        <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardClickableStyle"
+            android:id="@+id/cardBarcodeLayout"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:maxWidth="@dimen/card_width_max"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/cardEcardLayout"
+            app:layout_constraintStart_toEndOf="@id/cardQrcodeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardLoginLayout"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/cardBarcodeBarcodeIv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/padding_normal"
+                android:adjustViewBounds="true"
+                android:background="@color/gray_300"
+                android:contentDescription="@string/card_barcode_content_description"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="4:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/barcode" />
+
+            <TextView
+                android:id="@+id/cardBarcodeTitleTv"
+                style="@style/AppCardTextTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:gravity="center_horizontal"
+                android:text="@string/card_barcode_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardBarcodeBarcodeIv" />
+
+            <TextView
+                style="@style/App.TextAppearance.Body1"
+                android:id="@+id/cardBarcodeCodeTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:textColor="@color/text_dark_medium_emphasis_day_night"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardBarcodeTitleTv"
+                tools:text="Número USP: 11223344" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/cardBarrierBtm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="cardBarcodeLayout, cardQrcodeLayout"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/padding_normal"
+            app:layout_constraintTop_toBottomOf="@id/cardBarrierBtm"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

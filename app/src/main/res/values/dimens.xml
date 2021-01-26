@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  standard metrics  -->
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_xlarge">48dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_radius">28dp</dimen>
+    <dimen name="keyline_1">72dp</dimen>
+    <dimen name="display_4_text_size">112sp</dimen>
+    <dimen name="highlight_3_text_size">48sp</dimen>
+    <dimen name="subtitle_1_text_size">16sp</dimen>
+
+    <item name="match_parent" format="integer" type="dimen">-1</item>
+    <item name="wrap_content" format="integer" type="dimen">-2</item>
+
+    <!-- project metrics -->
+    <dimen name="card_display_radius">8dp</dimen>
+    <dimen name="card_no_radius">0dp</dimen>
+
+    <!-- e-card metrics -->
+    <dimen name="ecard_profile_picture_width">100dp</dimen>
+    <dimen name="ecard_usp_logo_width">120dp</dimen>
+    <dimen name="ecard_color_stripe_long_height">12dp</dimen>
+    <dimen name="ecard_color_stripe_short_height">6dp</dimen>
+
+    <!-- Codes' metrics -->
+    <dimen name="qrcode_image_width">96dp</dimen>
+    <dimen name="barcode_image_width">@dimen/qrcode_image_width</dimen>
+
+    <!-- Dialog -->
+    <integer name="code_dialog_width_type">-1</integer>
+    <integer name="code_dialog_height_type">-2</integer>
+    <dimen name="code_dialog_width">@dimen/match_parent</dimen>
+    <dimen name="code_dialog_height">@dimen/wrap_content</dimen>
+    <dimen name="code_dialog_max_width">500dp</dimen>
+
+    <!-- Generic Card Metrics-->
+    <dimen name="card_external_margin_horizontal">16dp</dimen>
+    <dimen name="card_external_margin_vertical">16dp</dimen>
+    <dimen name="card_internal_margin_vertical">8dp</dimen>
+    <dimen name="card_internal_margin_horizontal">16dp</dimen>
+    <dimen name="card_width_max">400dp</dimen>
+
+    <dimen name="toolbar_icon_margin_horizontal">8dp</dimen>
+
+    <!-- Login -->
+    <dimen name="login_state_text_max_width">200dp</dimen>
+
+    <!-- Restaurant Info -->
+    <dimen name="restaurant_info_keyline">72dp</dimen>
+    <dimen name="restaurant_info_margin_end">16dp</dimen>
+    <string name="restaurant_info_img_ratio">16:9</string>
+
+    <dimen name="restaurant_list_btn_padding_end">0dp</dimen>
+
+    <dimen name="surface_clickable_radius">16dp</dimen>
+
+</resources>
