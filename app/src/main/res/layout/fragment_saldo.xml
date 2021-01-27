@@ -14,6 +14,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/saldoProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateOnly="true"
+            android:layout_marginTop="-4dp"
+            android:layout_marginBottom="-12dp"
+            android:visibility="gone"/>
+
         <LinearLayout
             android:id="@+id/saldoToolbar"
             android:layout_width="match_parent"
@@ -34,6 +44,7 @@
                 android:layout_marginEnd="@dimen/padding_normal"
                 android:contentDescription="@string/toolbar_refresh_btn_description"
                 android:visibility="visible"
+                android:enabled="false"
                 app:icon="@drawable/ic_refresh" />
 
             <com.google.android.material.button.MaterialButton
@@ -45,6 +56,8 @@
                 app:icon="@drawable/ic_settings" />
 
         </LinearLayout>
+
+
 
         <LinearLayout
             style="@style/AppNormalCardStyle"

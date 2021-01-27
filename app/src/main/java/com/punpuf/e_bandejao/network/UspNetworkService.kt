@@ -45,7 +45,7 @@ interface UspNetworkService {
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST(NETWORK_ENDPOINT_GENERATE_BOLETO)
-    suspend fun fetchGeneratedBoleto(@Body body: NetworkRequestGenerateBoleto): Response<NetworkResponseGenerateBoleto>
+    fun fetchGeneratedBoleto(@Body body: NetworkRequestGenerateBoleto): LiveData<ApiResponse<NetworkResponseGenerateBoleto>>
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST(NETWORK_ENDPOINT_FETCH_ONGOING_BOLETO)
@@ -53,7 +53,7 @@ interface UspNetworkService {
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST(NETWORK_ENDPOINT_CANCEL_BOLETO)
-    suspend fun cancelBoleto(@Body body: NetworkRequestDeleteBoleto): Response<String>
+    fun cancelBoleto(@Body body: NetworkRequestDeleteBoleto): LiveData<ApiResponse<String>>
 
 
 

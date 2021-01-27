@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_cardFragment_to_codeDisplayDialogFragment"
             app:destination="@id/codeDisplayDialogFragment" />
+        <action
+            android:id="@+id/action_cardFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -44,6 +47,9 @@
         <action
             android:id="@+id/action_bandejaoFragment_to_restaurantListFragment"
             app:destination="@id/restaurantListFragment" />
+        <action
+            android:id="@+id/action_bandejaoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/saldoFragment"
@@ -55,6 +61,9 @@
         <action
             android:id="@+id/action_saldoFragment_to_codeDisplayDialogFragment"
             app:destination="@id/codeDisplayDialogFragment" />
+        <action
+            android:id="@+id/action_saldoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/restaurantListFragment"
@@ -79,5 +88,12 @@
         <action
             android:id="@+id/action_libraryFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.punpuf.e_bandejao.ui.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

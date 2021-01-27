@@ -11,9 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.punpuf.e_bandejao.Const
 import com.punpuf.e_bandejao.Const.Companion.SHORTCUT_BARCODE_INTENT_DATA
 import com.punpuf.e_bandejao.Const.Companion.SHORTCUT_QRCODE_INTENT_DATA
@@ -46,44 +46,22 @@ class CardFragment : Fragment() {
     private var userProfileListResource: Resource<List<UserProfile>>? = null
     private var profilePictureInfoResource: Resource<ProfilePictureInfo?>? = null
 
-    private var currentProfileId = 0
+    private var currentProfileId = 0 // used for users with multiple profiles available
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_card, container, false)
 
+    // Configuring views
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        model.testOperations()
 
         //Shortcuts
         val intentData = activity?.intent?.data
         if (intentData.toString() == SHORTCUT_QRCODE_INTENT_DATA) model.setAutoOpenQrcode(true)
         else if (intentData.toString() == SHORTCUT_BARCODE_INTENT_DATA) model.setAutoOpenBarcode(true)
         activity?.intent?.data = null
-
-        // Feed -> User Info
-        model.userInfo.observe(viewLifecycleOwner) {
-            d("User Info -> UI Update: $it")
-            userInfo = it
-            updateUserInfoUI()
-        }
-
-        // Feed -> Resource of Profile List
-        model.userProfileList.observe(viewLifecycleOwner) { profileListData: Resource<List<UserProfile>>? ->
-            d("Profile List -> UI Update: ${profileListData?.data}")
-            userProfileListResource = profileListData
-            updateUserProfileUI()
-        }
-
-        // Feed -> Resource of Profile Picture
-        model.userProfilePicture.observe(viewLifecycleOwner) { profilePictureData: Resource<ProfilePictureInfo?>? ->
-            d("Profile Picture -> UI Update: ${profilePictureData?.data}")
-            profilePictureInfoResource = profilePictureData
-            updateProfilePictureUI()
-        }
 
         // Click -> QR Code Card
         cardQrcodeLayout.setOnClickListener {
@@ -124,10 +102,9 @@ class CardFragment : Fragment() {
             view.findNavController().navigate(action)
         }
 
-        // Click -> Logout Button
-        cardToolbarSettingsBtn.setOnClickListener {
-            model.logoutUser()
-        }
+        // Settings
+        val action = CardFragmentDirections.actionCardFragmentToSettingsFragment()
+        cardToolbarSettingsBtn.setOnClickListener { findNavController().navigate(action) }
 
         // Give profile picture's top right corner a radius
         val cardRadius = resources.getDimension(R.dimen.card_display_radius)
@@ -145,21 +122,53 @@ class CardFragment : Fragment() {
         TooltipCompat.setTooltipText(cardToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
     }
 
+    // Adding listeners to view model
+    override fun onResume() {
+        super.onResume()
+
+        // Feed -> User Info
+        model.userInfo.observe(viewLifecycleOwner) {
+            d("User Info -> UI Update: $it")
+            userInfo = it
+            updateUserInfoUI()
+        }
+
+        // Feed -> Resource of Profile List
+        model.userProfileList.observe(viewLifecycleOwner) { profileListData: Resource<List<UserProfile>>? ->
+            d("Profile List -> UI Update: ${profileListData?.data}")
+            userProfileListResource = profileListData
+            updateUserProfileUI()
+        }
+
+        // Feed -> Resource of Profile Picture
+        model.userProfilePicture.observe(viewLifecycleOwner) { profilePictureData: Resource<ProfilePictureInfo?>? ->
+            d("Profile Picture -> UI Update: ${profilePictureData?.data}")
+            profilePictureInfoResource = profilePictureData
+            updateProfilePictureUI()
+        }
+    }
+
     // Updates logged-in UI state, card, and barcode card
     private fun updateUserInfoUI() {
-        if (userInfo == null || userInfo?.numberUSP == "") {
-            cardLoginLayout.visibility = View.VISIBLE
-            cardToolbarSettingsBtn.visibility = View.GONE
 
+        // User not logged in
+        if (userInfo == null || userInfo?.numberUSP == "") {
+            Utils.makeViewsVisible(
+                cardLoginLayout,
+            )
+            Utils.makeViewsGone(
+                cardToolbarProfileSwapBtn,
+                cardBarcodeLayout,
+                cardQrcodeLayout,
+            )
             cardEcardUserNameTv.text = ""
             cardEcardUserDepartmentTv.text = ""
-
-            cardBarcodeLayout.visibility = View.GONE
+            cardQrcodeStatusTv.text = ""
 
             return
         }
 
-        // Shortcut auto open Dialog
+        // Shortcut -> open Dialog
         if (model.getAutoOpenBarcode() == true) {
             model.setAutoOpenBarcode(false)
             val delay = System.currentTimeMillis() - model.getAutoOpenSetTime()
@@ -168,11 +177,14 @@ class CardFragment : Fragment() {
             }
         }
 
+        // Populating views with info
         cardLoginLayout.visibility = View.GONE
-        cardToolbarSettingsBtn.visibility = View.VISIBLE
 
         cardEcardUserNameTv.text = userInfo?.name
         cardEcardUserDepartmentTv.text = userInfo?.departmentName
+
+        cardQrcodeLayout.visibility = View.VISIBLE // added here as well to avoid layout misconfiguration
+        cardQrcodeQrcodeIv.setImageResource(R.color.app_card_profile_picture_background)
 
         cardBarcodeLayout.visibility = View.VISIBLE
         cardBarcodeCodeTv.text = getString(R.string.card_barcode_code, userInfo?.numberUSP)
@@ -181,6 +193,7 @@ class CardFragment : Fragment() {
 
     //Updates qrcode, card with the user's profiles
     private fun updateUserProfileUI() {
+
         // User not logged in
         if (userInfo == null || userInfo?.numberUSP.isNullOrEmpty()) {
             cardQrcodeLayout.visibility = View.GONE
@@ -201,7 +214,7 @@ class CardFragment : Fragment() {
                 if (currentProfileId >= numProfiles) currentProfileId = 0
                 updateUserProfileUI()
             }
-        } else {
+        } else { // only one profile
             cardToolbarProfileSwapBtn.visibility = View.GONE
         }
 
@@ -240,7 +253,6 @@ class CardFragment : Fragment() {
 
         // token valid
         if (isTokenValid) {
-            //cardQrcodeStatusTv.text = getString(R.string.card_qrcode_expiration_date_state_valid)
             if (DateUtils.isToday(tokenExpirationDate?.time ?: 0)) {
                 cardQrcodeStatusTv.text = getString(R.string.card_qrcode_expiration_date_msg_today_valid, DateFormat.format("HH:mm", tokenExpirationDate))
             } else {
@@ -262,7 +274,7 @@ class CardFragment : Fragment() {
                 else ""
         }
 
-        // Shortcut auto open Dialog
+        // Shortcut -> open QRCode Dialog
         if (!currentProfile?.qrCodeToken.isNullOrEmpty() && isTokenValid && model.getAutoOpenQrcode() == true) {
             model.setAutoOpenQrcode(false)
             val delay = System.currentTimeMillis() - model.getAutoOpenSetTime()
@@ -273,7 +285,7 @@ class CardFragment : Fragment() {
 
     }
 
-    // Update Profile Picture
+    // Tries to set ecard profile picture to iv if reference is not null
     private fun updateProfilePictureUI() {
         if (profilePictureInfoResource?.data == null ||
             profilePictureInfoResource?.data?.location.isNullOrEmpty()) {

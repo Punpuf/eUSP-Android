@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import com.punpuf.e_bandejao.R
 import com.punpuf.e_bandejao.model.SaldoViewModel
 import com.punpuf.e_bandejao.util.Utils
+import com.punpuf.e_bandejao.vo.Boleto
+import com.punpuf.e_bandejao.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card.*
 import kotlinx.android.synthetic.main.fragment_saldo.*
@@ -29,79 +31,28 @@ class SaldoFragment : Fragment() {
 
     private val model: SaldoViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_saldo, container, false)
 
-
+    // Configuring views: button clicks, edit text input
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        saldoToolbarSettingsBtn.setOnClickListener { model.logoutUser() }
+        // Toolbar buttons: Settings & Refresh
+        val settingsAction = SaldoFragmentDirections.actionSaldoFragmentToSettingsFragment()
+        saldoToolbarSettingsBtn.setOnClickListener { findNavController().navigate(settingsAction) }
 
+        saldoToolbarRefreshBtn.setOnClickListener { model.refreshBoleto() }
+
+        // Login card button
         loginCardButton.setOnClickListener {
             val action = SaldoFragmentDirections.actionSaldoFragmentToLoginFragment()
             findNavController().navigate(action)
         }
 
-        model.userInfo.observe(viewLifecycleOwner) { user ->
-            if (user == null) {
-                saldoToolbarSettingsBtn.visibility = View.GONE
-                saldoToolbarRefreshBtn.visibility = View.GONE
-                saldoLoginCardConstraintLayout.visibility = View.VISIBLE
-            }
-            else {
-                saldoToolbarSettingsBtn.visibility = View.VISIBLE
-                saldoToolbarRefreshBtn.visibility = View.VISIBLE
-                saldoLoginCardConstraintLayout.visibility = View.GONE
-            }
-        }
-
-        model.accountBalance.observe(viewLifecycleOwner) {
-            saldoAccountBalanceTv.text = if (it?.data == null) getString(R.string.saldo_title) else getString(R.string.saldo_reais_title_template, it.data)
-        }
-
-        model.ongoingBoleto.observe(viewLifecycleOwner) {
-            // user not logged in
-            if (it == null) {
-                saldoBoletoLayout.visibility = View.GONE
-                saldoDepositLayout.visibility = View.GONE
-                return@observe
-            }
-
-            // no ongoing boleto
-            if (it.data == null) {
-                saldoBoletoLayout.visibility = View.GONE
-                saldoDepositLayout.visibility = View.VISIBLE
-                return@observe
-            }
-
-            // ongoing boleto available
-            saldoBoletoLayout.visibility = View.VISIBLE
-            saldoDepositLayout.visibility = View.GONE
-
-            val boleto = it.data
-
-            saldoBoletoTitleTv.text = getString(R.string.saldo_boleto_ongoing, boleto.amount)
-            saldoBoletoExpirationDateTv.text = getString(
-                R.string.saldo_boleto_expiration_date,
-                boleto.expirationDate
-            )
-            saldoBoletoCodeTv.text = boleto.barcode?. replace(" ", "\n")
-
-            saldoBoletoCopyCodeBtn.setOnClickListener {
-                val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-                clipboard?.setPrimaryClip(ClipData.newPlainText("", boleto.barcode))
-                Toast.makeText(context, R.string.saldo_boleto_code_copied, Toast.LENGTH_SHORT).show()
-            }
-
-            saldoBoletoDeleteBtn.setOnClickListener {
-                model.deleteBoleto(boleto.id)
-            }
-        }
-
+        // Processing deposit amount input edit text
         saldoDepositEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -147,4 +98,93 @@ class SaldoFragment : Fragment() {
         TooltipCompat.setTooltipText(saldoToolbarRefreshBtn, getString(R.string.toolbar_refresh_btn_description))
         TooltipCompat.setTooltipText(saldoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
     }
+
+    // Model data updates
+    override fun onResume() {
+        super.onResume()
+
+        // indicates if user is logged in
+        model.getUserInfo().observe(viewLifecycleOwner) { user ->
+            if (user == null) {
+                saldoToolbarRefreshBtn.visibility = View.GONE
+                saldoToolbarRefreshBtn.isEnabled = false
+                saldoLoginCardConstraintLayout.visibility = View.VISIBLE
+            }
+            else {
+                saldoToolbarRefreshBtn.visibility = View.VISIBLE
+                saldoLoginCardConstraintLayout.visibility = View.GONE
+            }
+        }
+
+        // account balance
+        model.accountBalance.observe(viewLifecycleOwner) {
+            saldoAccountBalanceTv.text = if (it?.data == null) getString(R.string.saldo_title) else getString(R.string.saldo_reais_title_template, it.data)
+        }
+
+        // ongoing boleto data
+        model.ongoingBoleto.observe(viewLifecycleOwner) {
+            // user not logged in
+            if (it == null) {
+                saldoBoletoLayout.visibility = View.GONE
+                saldoDepositLayout.visibility = View.GONE
+                return@observe
+            }
+
+            if (it.status == Resource.Status.LOADING) {
+                Utils.makeViewsVisible(saldoProgressBar)
+                Utils.disableButtons(
+                    saldoToolbarRefreshBtn,
+                    saldoDepositSubmitBtn,
+                    saldoBoletoCopyCodeBtn,
+                    saldoBoletoDeleteBtn,
+                    saldoDepositEditText,
+                )
+            }
+            else {
+                Utils.makeViewsGone(saldoProgressBar)
+                Utils.enableButtons(
+                    saldoToolbarRefreshBtn,
+                    saldoDepositSubmitBtn,
+                    saldoBoletoCopyCodeBtn,
+                    saldoBoletoDeleteBtn,
+                    saldoDepositEditText,
+                )
+            }
+
+            // no ongoing boleto
+            if (it.data == null) {
+                saldoBoletoLayout.visibility = View.GONE
+                saldoDepositLayout.visibility = View.VISIBLE
+                return@observe
+            }
+
+            // ongoing boleto available
+            saldoBoletoLayout.visibility = View.VISIBLE
+            saldoDepositLayout.visibility = View.GONE
+
+            configureBoletoView(it.data)
+
+        }
+    }
+
+    // Configures the view with info of the open boleto
+    private fun configureBoletoView(boleto: Boleto) {
+        saldoBoletoTitleTv.text = getString(R.string.saldo_boleto_ongoing, boleto.amount)
+        saldoBoletoExpirationDateTv.text = getString(
+            R.string.saldo_boleto_expiration_date,
+            boleto.expirationDate
+        )
+        saldoBoletoCodeTv.text = boleto.barcode?. replace(" ", "\n")
+
+        saldoBoletoCopyCodeBtn.setOnClickListener {
+            val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+            clipboard?.setPrimaryClip(ClipData.newPlainText("", boleto.barcode))
+            Toast.makeText(context, R.string.saldo_boleto_code_copied, Toast.LENGTH_SHORT).show()
+        }
+
+        saldoBoletoDeleteBtn.setOnClickListener {
+            model.deleteBoleto(boleto.id)
+        }
+    }
+
 }

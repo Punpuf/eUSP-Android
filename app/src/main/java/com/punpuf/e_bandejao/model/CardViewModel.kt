@@ -80,11 +80,11 @@ class CardViewModel @ViewModelInject constructor(
     fun getAutoOpenSetTime() = shouldAutoOpenSetTime
 
 
-    fun testOperations() {
+    /*fun testOperations() {
         d("GOING TO TEST SOMETHING -------------------------")
         viewModelScope.launch {
             //cardRepository.fetchRestaurantList()
         }
-    }
+    }*/
 
 }

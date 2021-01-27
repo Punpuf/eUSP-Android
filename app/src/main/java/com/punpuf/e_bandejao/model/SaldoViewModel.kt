@@ -7,10 +7,10 @@ import com.punpuf.e_bandejao.repo.SaldoRepository
 import com.punpuf.e_bandejao.util.AbsentLiveData
 import com.punpuf.e_bandejao.vo.Boleto
 import com.punpuf.e_bandejao.vo.Resource
+import com.punpuf.e_bandejao.vo.SaldoState
 import com.punpuf.e_bandejao.vo.UserInfo
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import timber.log.Timber.d
 
 class SaldoViewModel @ViewModelInject constructor(
@@ -18,11 +18,24 @@ class SaldoViewModel @ViewModelInject constructor(
     private val cardRepository: CardRepository,
 ) : ViewModel() {
 
-    val userInfo: LiveData<UserInfo?> = cardRepository.getUserInfo()
+    //User data: refreshes ongoing boleto data if user "logs in"
+    private val userInfoData = MediatorLiveData<UserInfo?>()
+    private var userInfoOld: UserInfo? = null
+    fun getUserInfo(): LiveData<UserInfo?> {
+        userInfoData.addSource(cardRepository.getUserInfo()) {
+            userInfoData.postValue(it)
+            if (userInfoOld == null && it != null){
+                newBoletoOp(SaldoState.OP_TYPE.GET)
+                userInfoOld = it
+            }
+        }
+        return userInfoData
+    }
 
+    // Account Balance
     private val accountBalanceData = MediatorLiveData<Resource<String?>>()
     private var accountBalanceJob: Job? = null
-    val accountBalance: LiveData<Resource<String?>> = Transformations.switchMap(userInfo) { user ->
+    val accountBalance: LiveData<Resource<String?>> = Transformations.switchMap(getUserInfo()) { user ->
         if (user == null) { AbsentLiveData.create<Resource<String?>>() }
         else {
             accountBalanceJob?.cancel()
@@ -36,43 +49,49 @@ class SaldoViewModel @ViewModelInject constructor(
         }
     }
 
+    // Boleto Ops
+    private var nextBoletoOpId = 0
+    private fun newBoletoOp(opType: SaldoState.OP_TYPE, boletoId: String = "", amount: Double = 0.0) {
+        d("Received new OP; $opType")
+        ongoingBoletoOp.postValue(SaldoState(opType, nextBoletoOpId, extraId = boletoId, extraAmount = amount,))
+        nextBoletoOpId++
+    }
+    private val ongoingBoletoOp = MediatorLiveData<SaldoState>()
+
+    //Ongoing Boleto
     private val ongoingBoletoData = MediatorLiveData<Resource<Boleto?>>()
+    private var ongoingBoletoSource : LiveData<Resource<Boleto?>>? = null
     private var ongoingBoletoJob: Job? = null
-    val ongoingBoleto: LiveData<Resource<Boleto?>> = Transformations.switchMap(userInfo) { user ->
-        if (user == null) { AbsentLiveData.create<Resource<Boleto?>>() }
-        else {
-            ongoingBoletoJob?.cancel()
-            ongoingBoletoJob = viewModelScope.launch {
-                ongoingBoletoData.addSource(saldoRepo.fetchOngoingBoleto()) {
-                    ongoingBoletoData.postValue(it)
-                }
+    val ongoingBoleto: LiveData<Resource<Boleto?>> = Transformations.switchMap(ongoingBoletoOp) { state ->
+        // end previous jobs
+        ongoingBoletoJob?.cancel()
+        if (ongoingBoletoSource != null) ongoingBoletoData.removeSource(ongoingBoletoSource!!)
+
+        ongoingBoletoJob = viewModelScope.launch {
+            ongoingBoletoSource = when(state.opType) {
+                SaldoState.OP_TYPE.GET -> { saldoRepo.fetchOngoingBoleto() }
+                SaldoState.OP_TYPE.CREATE -> { saldoRepo.generateBoleto(state.extraAmount) }
+                SaldoState.OP_TYPE.DELETE -> { saldoRepo.cancelBoleto(state.extraId) }
             }
-            ongoingBoletoData
+            ongoingBoletoData.addSource(ongoingBoletoSource!!) {
+                ongoingBoletoData.postValue(it)
+            }
         }
+
+        ongoingBoletoData
     }
 
-    private var deleteBoletoJob: Job? = null
+    // Boleto actions
     fun deleteBoleto(id: String) {
-        deleteBoletoJob?.cancel()
-        deleteBoletoJob = viewModelScope.launch {
-            saldoRepo.cancelBoleto(id)
-        }
+        newBoletoOp(SaldoState.OP_TYPE.DELETE, boletoId = id)
     }
 
-    private var logoutUserJob: Job? = null
-    fun logoutUser() {
-        logoutUserJob?.cancel()
-        logoutUserJob = viewModelScope.launch {
-            cardRepository.logoutUser()
-        }
+    fun refreshBoleto() {
+        newBoletoOp(SaldoState.OP_TYPE.GET)
     }
 
-    private var generateBoletoJob: Job? = null
     fun generateBoleto(amount: Double) {
-        generateBoletoJob?.cancel()
-        generateBoletoJob = viewModelScope.launch {
-            saldoRepo.generateBoleto(amount)
-        }
+        newBoletoOp(SaldoState.OP_TYPE.CREATE, amount = amount)
     }
 
 

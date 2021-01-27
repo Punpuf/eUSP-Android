@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
+import android.view.View
+import android.widget.Button
 import androidx.core.app.NotificationManagerCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -69,7 +71,7 @@ class Utils {
             NotificationManagerCompat.from(appContext).notify(System.currentTimeMillis().toInt(), builder.build())*/
         }
 
-        private fun createNotificationChannel(appContext: Context) {
+        /*private fun createNotificationChannel(appContext: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val importance = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel("work play sleep", "Soy un canal", importance).apply {
@@ -79,15 +81,31 @@ class Utils {
                 val notificationManager = NotificationManagerCompat.from(appContext)
                 notificationManager.createNotificationChannel(channel)
             }
-        }
+        }*/
 
-        fun stringToDigits(string: String?): String {
+        private fun stringToDigits(string: String?): String {
             return Regex("\\D").replace(string ?: "", "")
         }
 
         fun stringToDigitsNoLeadingZero(string: String?): String {
             if (string.isNullOrBlank()) return ""
             return Regex("^0+(?!\$)").replace(stringToDigits(string), "")
+        }
+
+        fun makeViewsVisible (vararg views: View) {
+            for (view in views) view.visibility = View.VISIBLE
+        }
+
+        fun makeViewsGone (vararg views: View) {
+            for (view in views ) view.visibility = View.GONE
+        }
+
+        fun enableButtons(vararg buttons: View) {
+            for (btn in buttons) btn.isEnabled = true
+        }
+
+        fun disableButtons(vararg buttons: View) {
+            for (btn in buttons) btn.isEnabled = false
         }
     }
 }

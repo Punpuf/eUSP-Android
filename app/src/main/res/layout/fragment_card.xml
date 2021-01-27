@@ -182,7 +182,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardEcardColorStripe3"
-                tools:text="Josualdo Ribeiro Guilhermino Magalhães Oliveira Roberto Silveira" />
+                tools:text="Josualdo Ribeiro Guilhermino Magalhães " />
 
             <!-- user department-->
             <TextView
@@ -254,8 +254,8 @@
         <!-- -/-/-/- QR CODE CARD /-/-/- -->
         <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/- -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardQrcodeLayout"
             style="@style/AppNormalCardClickableStyle"
+            android:id="@+id/cardQrcodeLayout"
             android:layout_width="0dp"
             android:visibility="gone"
             android:layout_marginEnd="@dimen/spacing_normal"
@@ -273,7 +273,7 @@
                 android:layout_marginHorizontal="0dp"
                 android:layout_marginVertical="0dp"
                 android:adjustViewBounds="true"
-                android:background="@color/gray_300"
+                android:background="@color/app_card_profile_picture_background"
                 android:contentDescription="@string/card_qrcode_content_description"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
