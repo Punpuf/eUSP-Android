@@ -21,11 +21,13 @@ import com.punpuf.e_bandejao.vo.Restaurant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_restaurant_list.*
 import kotlinx.android.synthetic.main.list_item_select_restaurant.view.*
+import timber.log.Timber.d
 
 @AndroidEntryPoint
 class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
 
     private val model: RestaurantListViewModel by viewModels()
+    private val adapter = RestaurantListRecyclerAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +41,14 @@ class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
         NavigationUI.setupWithNavController(restaurantListToolbar, NavHostFragment.findNavController(this))
         restaurantListToolbar.title = ""
 
-        val adapter = RestaurantListRecyclerAdapter(this)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        restaurantListRecyclerView.layoutManager = layoutManager
+        restaurantListRecyclerView.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         model.getRestaurantList().observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                adapter.updateData(it.data)
-                restaurantListRecyclerView.adapter = adapter
-            }
+            if (it.data != null) adapter.updateData(it.data)
         }
     }
 
@@ -91,7 +92,6 @@ class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
         }
 
         override fun getItemCount(): Int = data.size
-
 
     }
 

@@ -12,7 +12,6 @@ class RestaurantListViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val restaurantListData = MediatorLiveData<Resource<List<Restaurant>>>()
-
     fun getRestaurantList() : LiveData<Resource<List<Restaurant>>> {
             viewModelScope.launch {
                 restaurantListData.addSource(repo.getRestaurantList()) {

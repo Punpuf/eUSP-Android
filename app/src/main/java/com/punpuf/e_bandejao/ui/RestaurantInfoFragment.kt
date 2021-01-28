@@ -97,6 +97,7 @@ class RestaurantInfoFragment : Fragment() {
             restaurantInfoPhoneContentTv.visibility = View.GONE
         }
 
+        // location thumbnail
         Glide.with(this).load(restaurant.thumbnailUrl).into(restaurantInfoThumbnailIv)
         
     }

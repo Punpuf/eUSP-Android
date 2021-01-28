@@ -26,6 +26,7 @@ class BandejaoFragment : Fragment() {
 
     private val model: BandejaoViewModel by viewModels()
     private val tabDateFormatter = SimpleDateFormat("EE\n(dd/MM)", Locale.getDefault())
+    private lateinit var adapter: DailyMenuFragmentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,27 @@ class BandejaoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        d("BANDECO FOR LIVE ------------------------------")
+        // Adapter for view pager
+        adapter = DailyMenuFragmentAdapter(this)
+        bandejaoViewPager.adapter = adapter
+
+        // Click -> Choose restaurant
+        bandejaoSelectRestaurantLayout.setOnClickListener {
+            val action = BandejaoFragmentDirections.actionBandejaoFragmentToRestaurantListFragment()
+            findNavController().navigate(action)
+        }
+
+        // Adding Tooltips for Toolbar's Buttons
+        TooltipCompat.setTooltipText(bandejaoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
+
+        // Click -> Settings Btn
+        val action = BandejaoFragmentDirections.actionBandejaoFragmentToSettingsFragment()
+        bandejaoToolbarSettingsBtn.setOnClickListener { findNavController().navigate(action) }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // Observes Selected Restaurant
         model.currentRestaurant.observe(viewLifecycleOwner) {
@@ -46,11 +67,9 @@ class BandejaoFragment : Fragment() {
 
         // Observes Menu of Selected Restaurant
         model.weeklyMenu.observe(viewLifecycleOwner) {
+
             val weeklyMenu = it.data
-
-            d("$it; restaurant is ${weeklyMenu?.restaurantId}; 5 dinner is ${weeklyMenu?.dailyMenus?.get(5)?.dinnerMenu}")
-
-            bandejaoViewPager.adapter = DailyMenuFragmentAdapter(this, weeklyMenu)
+            adapter.updateData(it.data)
 
             // configure titles for the tabs
             if (weeklyMenu != null) {
@@ -60,8 +79,6 @@ class BandejaoFragment : Fragment() {
                 }.attach()
             }
 
-            d("tab layout pos ${model.tabLayoutPosition}")
-
             // set initial page to $today
             if (weeklyMenu != null && model.tabLayoutPosition == null) {
                 var initPage = weeklyMenu.dailyMenus.size - 1
@@ -70,28 +87,16 @@ class BandejaoFragment : Fragment() {
                     if (dailyMenu.dateProcessedStart <= currentTime &&
                         currentTime <= dailyMenu.dateProcessedEnd) {
                         initPage = index
-                        d("daily menu found!!! $index: $dailyMenu")
                         return@forEachIndexed
                     }
                 }
                 bandejaoViewPager.setCurrentItem(initPage, false)
                 model.tabLayoutPosition = initPage
             }
-
             else if (weeklyMenu != null && model.tabLayoutPosition != null) {
                 bandejaoViewPager.setCurrentItem(model.tabLayoutPosition ?: 0, false)
             }
-
         }
-
-        bandejaoSelectRestaurantLayout.setOnClickListener {
-            val action = BandejaoFragmentDirections.actionBandejaoFragmentToRestaurantListFragment()
-            findNavController().navigate(action)
-        }
-
-        // Adding Tooltips for Toolbar's Buttons
-        TooltipCompat.setTooltipText(bandejaoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
-
     }
 
     override fun onStop() {
@@ -99,13 +104,13 @@ class BandejaoFragment : Fragment() {
         model.tabLayoutPosition = bandejaoTabLayout.selectedTabPosition
     }
 
-    class DailyMenuFragmentAdapter(fragment: Fragment, val data: WeeklyMenu?) : FragmentStateAdapter(fragment) {
+    class DailyMenuFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+        var data: WeeklyMenu? = null
 
-        /*private var data: WeeklyMenu? = null
-        fun updateDate(newData: WeeklyMenu?) {
+        fun updateData(newData: WeeklyMenu?) {
             data = newData
             notifyDataSetChanged()
-        }*/
+        }
 
         override fun getItemCount(): Int = data?.dailyMenus?.size ?: 0
 
@@ -114,19 +119,6 @@ class BandejaoFragment : Fragment() {
             fragment.arguments = Bundle().apply { putString(FRAG_ARG_DAILY_MENU, Gson().toJson(data?.dailyMenus?.get(position))) }
             return fragment
         }
-
-        /*override fun getItemId(position: Int): Long = ((data?.restaurantId ?: 0)
-            * (data?.dailyMenus?.get(position)?.dateProcessedStart ?: 0)).toLong()
-
-        override fun containsItem(itemId: Long): Boolean {
-            if (data?.restaurantId == null) return false
-            val mealStart = itemId / data!!.restaurantId
-
-            for (meal in data?.dailyMenus ?: emptyList()) {
-                if (meal.dateProcessedStart == mealStart) return true
-            }
-            return false
-        }*/
     }
 
 

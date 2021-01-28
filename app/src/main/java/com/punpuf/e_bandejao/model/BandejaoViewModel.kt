@@ -40,7 +40,7 @@ class BandejaoViewModel @ViewModelInject constructor(
     private var lastSelectedRestaurantId: Int? = null
     private val weeklyMenuData = MediatorLiveData<Resource<WeeklyMenu?>>()
     val weeklyMenu: LiveData<Resource<WeeklyMenu?>> = Transformations.switchMap(selectedRestaurant) { selectedRestaurant ->
-        lastSelectedRestaurantId = selectedRestaurant?.id
+        lastSelectedRestaurantId = selectedRestaurant?.id ?:DEFAULT_BANDEJAO_ID
 
         // so that init page is set when data changes
         if (prevRestaurant != null && prevRestaurant != selectedRestaurant) tabLayoutPosition = null
@@ -48,10 +48,12 @@ class BandejaoViewModel @ViewModelInject constructor(
 
         job?.cancel()
         job = viewModelScope.launch {
+            d("Selected RESTAURAJT ISSSSS ${selectedRestaurant?.id}")
             weeklyMenuData.addSource(
                 bandejaoRepo.fetchRestaurantMenu(selectedRestaurant?.id ?: DEFAULT_BANDEJAO_ID)
             ) {
                 d("weeklyMenu -- ${it.status}")
+                d("KJEMPE VIKTIG!!!! last id is: $lastSelectedRestaurantId, current: ${it?.data?.restaurantId}")
                 if (lastSelectedRestaurantId == it?.data?.restaurantId) weeklyMenuData.postValue(it)
             }
         }
