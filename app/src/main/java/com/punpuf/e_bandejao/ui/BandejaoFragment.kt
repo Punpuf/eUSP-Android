@@ -7,16 +7,20 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.TooltipCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.punpuf.e_bandejao.Const.Companion.FRAG_ARG_DAILY_MENU
 import com.punpuf.e_bandejao.R
 import com.punpuf.e_bandejao.model.BandejaoViewModel
+import com.punpuf.e_bandejao.vo.DailyMenu
 import com.punpuf.e_bandejao.vo.WeeklyMenu
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_bandejao.*
+import kotlinx.android.synthetic.main.fragment_restaurant_list.*
 import timber.log.Timber.d
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,15 +47,19 @@ class BandejaoFragment : Fragment() {
         // Click -> Choose restaurant
         bandejaoSelectRestaurantLayout.setOnClickListener {
             val action = BandejaoFragmentDirections.actionBandejaoFragmentToRestaurantListFragment()
-            findNavController().navigate(action)
+            val extras = FragmentNavigatorExtras(it to "bandeco_to_frag_restaurant")
+            findNavController().navigate(action, extras)
         }
 
         // Adding Tooltips for Toolbar's Buttons
         TooltipCompat.setTooltipText(bandejaoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
 
         // Click -> Settings Btn
-        val action = BandejaoFragmentDirections.actionBandejaoFragmentToSettingsFragment()
-        bandejaoToolbarSettingsBtn.setOnClickListener { findNavController().navigate(action) }
+        bandejaoToolbarSettingsBtn.setOnClickListener {
+            val action = BandejaoFragmentDirections.actionBandejaoFragmentToSettingsFragment()
+            val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
+            findNavController().navigate(action, extras)
+        }
 
     }
 
@@ -69,7 +77,7 @@ class BandejaoFragment : Fragment() {
         model.weeklyMenu.observe(viewLifecycleOwner) {
 
             val weeklyMenu = it.data
-            adapter.updateData(it.data)
+            adapter.updateData(weeklyMenu?.restaurantId ?: 0,weeklyMenu?.dailyMenus?.toMutableList() ?: mutableListOf())
 
             // configure titles for the tabs
             if (weeklyMenu != null) {
@@ -105,19 +113,34 @@ class BandejaoFragment : Fragment() {
     }
 
     class DailyMenuFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-        var data: WeeklyMenu? = null
+        var restaurantId = 0
+        var data: MutableList<DailyMenu> = mutableListOf()
 
-        fun updateData(newData: WeeklyMenu?) {
-            data = newData
-            notifyDataSetChanged()
+        fun updateData(newRestaurantId: Int, newData: MutableList<DailyMenu>) {
+            d("New Daily menu data of $restaurantId incoming $newData")
+            restaurantId = newRestaurantId
+            data.clear()
+            data.addAll(newData)
+            this.notifyDataSetChanged()
         }
 
-        override fun getItemCount(): Int = data?.dailyMenus?.size ?: 0
+        override fun getItemCount(): Int = data.size
 
         override fun createFragment(position: Int): Fragment {
             val fragment = DailyMenuFragment()
-            fragment.arguments = Bundle().apply { putString(FRAG_ARG_DAILY_MENU, Gson().toJson(data?.dailyMenus?.get(position))) }
+            fragment.arguments = Bundle().apply { putString(FRAG_ARG_DAILY_MENU, Gson().toJson(data[position])) }
             return fragment
+        }
+
+        override fun getItemId(position: Int): Long {
+            d("returning an id for this item of ${"$restaurantId${data[position].dateProcessedStart}".toLong()}")
+            return "$restaurantId${data[position].dateProcessedStart}".toLong()
+        }
+
+        override fun containsItem(itemId: Long): Boolean {
+            return data.any { "$restaurantId${it.dateProcessedStart}".toLong() == itemId }
+            /*d("result is $result")
+            return result*/
         }
     }
 

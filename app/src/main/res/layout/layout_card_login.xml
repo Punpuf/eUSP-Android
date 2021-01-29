@@ -37,6 +37,7 @@
        android:layout_marginTop="@dimen/spacing_micro"
        android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
        android:text="@string/card_login_button"
+       android:transitionName="trans_dest_login_main"
        app:icon="@drawable/ic_baseline_login"
        tools:targetApi="lollipop" />
 

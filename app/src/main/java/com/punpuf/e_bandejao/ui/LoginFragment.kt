@@ -1,5 +1,8 @@
 package com.punpuf.e_bandejao.ui
 
+import android.graphics.Color
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.transition.MaterialContainerTransform
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +27,7 @@ import com.punpuf.e_bandejao.vo.LoginRequestTokenBundle
 import com.punpuf.e_bandejao.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_restaurant_list.*
 import timber.log.Timber.d
 import timber.log.Timber.e
 
@@ -37,13 +41,25 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_login, container, false)
+    ): View? {
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+            drawingViewId = R.id.mainNavHostFragment
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(ResourcesCompat.getColor(resources, R.color.colorPrimary, null))
+        }
+
+        return inflater.inflate(R.layout.fragment_login, container, false)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         NavigationUI.setupWithNavController(loginToolbar, NavHostFragment.findNavController(this))
         loginToolbar.title = ""
+        findNavController().addOnDestinationChangedListener { _, _, _ ->
+            restaurantListToolbar?.title = ""
+        }
 
         // force dark mode inside webview, if device is in dark mode
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
@@ -57,7 +73,10 @@ class LoginFragment : Fragment() {
             }
         }
         loginWebView.webViewClient = LoginWebViewClient()
+    }
 
+    override fun onResume() {
+        super.onResume()
 
         model.requestTokenBundle.observe(viewLifecycleOwner) {
             when(it.status) {
@@ -94,7 +113,6 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun updateUiWithWebView() {

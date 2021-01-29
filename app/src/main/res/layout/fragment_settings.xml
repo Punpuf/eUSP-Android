@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsNestedScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="trans_dest_settings_main"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="trans_dest_settings_main"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/settingsAppBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/settingsToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppToolbarStyle"
+                app:elevation="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    style="@style/AppCardSimpleToolbarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="@string/settings_title"
+                    tools:layout_marginStart="@dimen/keyline_1"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <Button
+            style="@style/Widget.App.Button.Outlined"
+            android:id="@+id/settingsAccountLogoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_logout"
+            android:layout_marginVertical="@dimen/padding_normal"
+            android:layout_marginHorizontal="@dimen/padding_normal"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toBottomOf="@id/settingsAppBar"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            style="@style/App.TextAppearance.Body1"
+            android:id="@+id/settingsAccountTitleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_normal"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginEnd="@dimen/padding_normal"
+            app:layout_constraintTop_toBottomOf="@id/settingsAppBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/settingsAccountLogoutBtn"
+            tools:text="Sua Conta"/>
+
+        <TextView
+            style="@style/App.TextAppearance.Body2"
+            android:id="@+id/settingsAccountDescriptionTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_normal"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginEnd="@dimen/padding_normal"
+            app:layout_constraintTop_toBottomOf="@id/settingsAccountTitleTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/settingsAccountLogoutBtn"
+            tools:text="Maria Rosana Martines Silveira (11287743)"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/settingsPrefs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:name="com.punpuf.e_bandejao.ui.PrefsFragment"
+            app:layout_constraintTop_toBottomOf="@id/settingsAccountDescriptionTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

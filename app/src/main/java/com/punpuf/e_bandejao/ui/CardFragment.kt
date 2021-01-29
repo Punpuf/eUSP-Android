@@ -72,13 +72,8 @@ class CardFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val action =
-                CardFragmentDirections.actionCardFragmentToCodeDisplayDialogFragment(codeType, code)
-            val extras = FragmentNavigatorExtras(
-                cardQrcodeQrcodeIv to TRANSITION_CODE_DIALOG_INNER_IMAGE,
-                cardQrcodeLayout to TRANSITION_CODE_DIALOG_OUTER_CARD
-            )
-            view.findNavController().navigate(action, extras)
+            val action = CardFragmentDirections.actionCardFragmentToCodeDisplayDialogFragment(codeType, code)
+            view.findNavController().navigate(action)
         }
 
         // Click -> Barcode Card
@@ -87,24 +82,23 @@ class CardFragment : Fragment() {
             val code = userInfo?.numberUSP
             if (code.isNullOrBlank()) return@setOnClickListener
 
-            val action =
-                CardFragmentDirections.actionCardFragmentToCodeDisplayDialogFragment(codeType, code)
-            val extras = FragmentNavigatorExtras(
-                cardBarcodeBarcodeIv to TRANSITION_CODE_DIALOG_INNER_IMAGE,
-                cardBarcodeLayout to TRANSITION_CODE_DIALOG_OUTER_CARD
-            )
-            view.findNavController().navigate(action, extras)
+            val action = CardFragmentDirections.actionCardFragmentToCodeDisplayDialogFragment(codeType, code)
+            view.findNavController().navigate(action)
         }
 
         // Click -> Login Button
         loginCardButton.setOnClickListener {
             val action = CardFragmentDirections.actionCardFragmentToLoginFragment()
-            view.findNavController().navigate(action)
+            val extras = FragmentNavigatorExtras(it to "trans_dest_login_main")
+            view.findNavController().navigate(action, extras)
         }
 
-        // Settings
-        val action = CardFragmentDirections.actionCardFragmentToSettingsFragment()
-        cardToolbarSettingsBtn.setOnClickListener { findNavController().navigate(action) }
+        // Click -> Settings
+        cardToolbarSettingsBtn.setOnClickListener {
+            val action = CardFragmentDirections.actionCardFragmentToSettingsFragment()
+            val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
+            findNavController().navigate(action, extras)
+        }
 
         // Give profile picture's top right corner a radius
         val cardRadius = resources.getDimension(R.dimen.card_display_radius)

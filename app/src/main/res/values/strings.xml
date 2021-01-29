@@ -101,4 +101,8 @@
 
     <string name="restaurant_list_info_btn_description">Ver informações do bandejão</string>
 
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_logout">Logout</string>
+
 </resources>

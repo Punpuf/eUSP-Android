@@ -6,6 +6,7 @@
     android:id="@+id/restaurantListLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:transitionName="bandeco_to_frag_restaurant"
     tools:background="@color/colorPrimary">
 
     <com.google.android.material.appbar.AppBarLayout

@@ -3,10 +3,14 @@ package com.punpuf.e_bandejao.ui
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
+import androidx.transition.ChangeBounds
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -60,9 +64,11 @@ class CodeDisplayDialogFragment : DialogFragment() {
 
     private fun getCodeBitmap(codeType: BarcodeFormat, code: String, isLong: Boolean): Bitmap {
         var width = 0; var height= 0
-        if (isLong) { width = 800; height = 100 }
-        else if (codeType == BarcodeFormat.QR_CODE) { width = 500; height = 500 }
-        else if (codeType == BarcodeFormat.ITF) { width = 600; height = 450 }
+        when {
+            isLong -> { width = 800; height = 100 }
+            codeType == BarcodeFormat.QR_CODE -> { width = 500; height = 500 }
+            codeType == BarcodeFormat.ITF -> { width = 600; height = 450 }
+        }
 
         val qrcodeBitMatrix = MultiFormatWriter().encode(
             code,

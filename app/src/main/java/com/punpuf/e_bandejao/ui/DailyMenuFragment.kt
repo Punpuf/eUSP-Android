@@ -22,9 +22,9 @@ class DailyMenuFragment : Fragment() {
 
         arguments?.takeIf { it.containsKey(FRAG_ARG_DAILY_MENU) }?.apply {
             val dailyMenu = Gson().fromJson(getString(FRAG_ARG_DAILY_MENU), DailyMenu::class.java)
-            d("Hello from DailyMenuFragment, I have a arg $dailyMenu")
+            // d("Hello from DailyMenuFragment, I have a arg $dailyMenu")
 
-            d("lunch not blank ${dailyMenu.lunchMenu}")
+            //d("lunch not blank ${dailyMenu.lunchMenu}")
             if (dailyMenu.lunchMenu.isNotBlank()) {
                 dailyMenuLunchContentTv.text = dailyMenu.lunchMenu
                 if (dailyMenu.lunchCalories.isNotBlank() && dailyMenu.lunchCalories != "0") {
@@ -34,7 +34,7 @@ class DailyMenuFragment : Fragment() {
             else dailyMenuLunchContentTv.text = getString(R.string.bandejao_content_empty)
 
 
-            d("dinner ${dailyMenu.dinnerMenu}")
+            //d("dinner ${dailyMenu.dinnerMenu}")
             if (dailyMenu.dinnerMenu.isNotBlank()) {
                 d("dinner not blank")
                 dailyMenuDinnerContentTv.text = dailyMenu.dinnerMenu

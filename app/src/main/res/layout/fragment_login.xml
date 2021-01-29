@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:transitionName="trans_dest_login_main"
     tools:context="com.punpuf.e_bandejao.ui.LoginFragment">
 
     <com.google.android.material.appbar.AppBarLayout

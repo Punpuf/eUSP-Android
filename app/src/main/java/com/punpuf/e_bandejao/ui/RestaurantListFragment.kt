@@ -1,11 +1,13 @@
 package com.punpuf.e_bandejao.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.ChangeBounds
+import com.google.android.material.transition.MaterialContainerTransform
 import com.google.gson.Gson
 import com.punpuf.e_bandejao.R
 import com.punpuf.e_bandejao.model.RestaurantListViewModel
@@ -33,13 +37,26 @@ class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_restaurant_list, container, false)
+    ): View? {
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+            drawingViewId = R.id.mainNavHostFragment
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(ResourcesCompat.getColor(resources, R.color.colorPrimary, null))
+        }
+
+        return inflater.inflate(R.layout.fragment_restaurant_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         NavigationUI.setupWithNavController(restaurantListToolbar, NavHostFragment.findNavController(this))
         restaurantListToolbar.title = ""
+        findNavController().addOnDestinationChangedListener { _, _, _ ->
+            restaurantListToolbar?.title = ""
+        }
 
         restaurantListRecyclerView.adapter = adapter
     }
@@ -103,3 +120,5 @@ class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
     }
 
 }
+
+

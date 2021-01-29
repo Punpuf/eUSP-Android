@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="prefsUiModeEntries">
+        <item>Dark</item>
+        <item>Mode</item>
+        <item>Sistema</item>
+        <item>Horário do Dia</item>
+    </array>
+    <array name="prefsUiModeEntriesValue">
+        <item>dark</item>
+        <item>light</item>
+        <item>system</item>
+        <item>time_of_day</item>
+    </array>
+</resources>

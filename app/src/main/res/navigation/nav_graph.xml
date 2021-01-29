@@ -46,7 +46,7 @@
         android:label="BandejaoFragment" >
         <action
             android:id="@+id/action_bandejaoFragment_to_restaurantListFragment"
-            app:destination="@id/restaurantListFragment" />
+            app:destination="@id/restaurantListFragment"/>
         <action
             android:id="@+id/action_bandejaoFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -71,7 +71,11 @@
         android:label="RestaurantListFragment">
         <action
             android:id="@+id/action_restaurantListFragment_to_restaurantInfoFragment"
-            app:destination="@id/restaurantInfoFragment" />
+            app:destination="@id/restaurantInfoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/restaurantInfoFragment"

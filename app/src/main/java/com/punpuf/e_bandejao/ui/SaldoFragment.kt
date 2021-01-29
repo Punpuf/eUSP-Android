@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.punpuf.e_bandejao.R
 import com.punpuf.e_bandejao.model.SaldoViewModel
@@ -21,6 +22,7 @@ import com.punpuf.e_bandejao.vo.Boleto
 import com.punpuf.e_bandejao.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_card.*
+import kotlinx.android.synthetic.main.fragment_restaurant_list.*
 import kotlinx.android.synthetic.main.fragment_saldo.*
 import kotlinx.android.synthetic.main.layout_card_login.*
 import timber.log.Timber.d
@@ -40,16 +42,24 @@ class SaldoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        findNavController().addOnDestinationChangedListener { _, _, _ ->
+            restaurantListToolbar?.title = ""
+        }
+
         // Toolbar buttons: Settings & Refresh
-        val settingsAction = SaldoFragmentDirections.actionSaldoFragmentToSettingsFragment()
-        saldoToolbarSettingsBtn.setOnClickListener { findNavController().navigate(settingsAction) }
+        saldoToolbarSettingsBtn.setOnClickListener {
+            val settingsAction = SaldoFragmentDirections.actionSaldoFragmentToSettingsFragment()
+            val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
+            findNavController().navigate(settingsAction, extras)
+        }
 
         saldoToolbarRefreshBtn.setOnClickListener { model.refreshBoleto() }
 
-        // Login card button
+        // Click -> Login card button
         loginCardButton.setOnClickListener {
             val action = SaldoFragmentDirections.actionSaldoFragmentToLoginFragment()
-            findNavController().navigate(action)
+            val extras = FragmentNavigatorExtras(it to "trans_dest_login_main")
+            findNavController().navigate(action, extras)
         }
 
         // Processing deposit amount input edit text

@@ -32,23 +32,6 @@ class SaldoViewModel @ViewModelInject constructor(
         return userInfoData
     }
 
-    // Account Balance
-    private val accountBalanceData = MediatorLiveData<Resource<String?>>()
-    private var accountBalanceJob: Job? = null
-    val accountBalance: LiveData<Resource<String?>> = Transformations.switchMap(getUserInfo()) { user ->
-        if (user == null) { AbsentLiveData.create<Resource<String?>>() }
-        else {
-            accountBalanceJob?.cancel()
-            accountBalanceJob = viewModelScope.launch {
-                accountBalanceData.addSource(saldoRepo.fetchAccountBalance()) {
-                    d("accountBalance - update $it")
-                    accountBalanceData.postValue(it)
-                }
-            }
-            accountBalanceData
-        }
-    }
-
     // Boleto Ops
     private var nextBoletoOpId = 0
     private fun newBoletoOp(opType: SaldoState.OP_TYPE, boletoId: String = "", amount: Double = 0.0) {
@@ -62,16 +45,16 @@ class SaldoViewModel @ViewModelInject constructor(
     private val ongoingBoletoData = MediatorLiveData<Resource<Boleto?>>()
     private var ongoingBoletoSource : LiveData<Resource<Boleto?>>? = null
     private var ongoingBoletoJob: Job? = null
-    val ongoingBoleto: LiveData<Resource<Boleto?>> = Transformations.switchMap(ongoingBoletoOp) { state ->
+    val ongoingBoleto: LiveData<Resource<Boleto?>> = Transformations.switchMap(ongoingBoletoOp) { op ->
         // end previous jobs
         ongoingBoletoJob?.cancel()
         if (ongoingBoletoSource != null) ongoingBoletoData.removeSource(ongoingBoletoSource!!)
 
         ongoingBoletoJob = viewModelScope.launch {
-            ongoingBoletoSource = when(state.opType) {
+            ongoingBoletoSource = when(op.opType) {
                 SaldoState.OP_TYPE.GET -> { saldoRepo.fetchOngoingBoleto() }
-                SaldoState.OP_TYPE.CREATE -> { saldoRepo.generateBoleto(state.extraAmount) }
-                SaldoState.OP_TYPE.DELETE -> { saldoRepo.cancelBoleto(state.extraId) }
+                SaldoState.OP_TYPE.CREATE -> { saldoRepo.generateBoleto(op.extraAmount) }
+                SaldoState.OP_TYPE.DELETE -> { saldoRepo.cancelBoleto(op.extraId) }
             }
             ongoingBoletoData.addSource(ongoingBoletoSource!!) {
                 ongoingBoletoData.postValue(it)
@@ -94,6 +77,27 @@ class SaldoViewModel @ViewModelInject constructor(
         newBoletoOp(SaldoState.OP_TYPE.CREATE, amount = amount)
     }
 
+    // Account Balance
+    private val accountBalanceData = MediatorLiveData<Resource<String?>>()
+    private var ongoingAccountBalanceSource : LiveData<Resource<String?>>? = null
+    private var accountBalanceJob: Job? = null
+    val accountBalance: LiveData<Resource<String?>> = Transformations.switchMap(ongoingBoletoOp) { op ->
+        if (op.opType == SaldoState.OP_TYPE.GET) {
+            // end previous work
+            accountBalanceJob?.cancel()
+            if (ongoingAccountBalanceSource != null) accountBalanceData.removeSource(ongoingAccountBalanceSource!!)
 
+            // get updated data
+            accountBalanceJob = viewModelScope.launch {
+                ongoingAccountBalanceSource = saldoRepo.fetchAccountBalance()
+                accountBalanceData.addSource(ongoingAccountBalanceSource!!) {
+                    d("accountBalance - update $it")
+                    accountBalanceData.postValue(it)
+                }
+            }
+        }
+
+        accountBalanceData
+    }
 
 }

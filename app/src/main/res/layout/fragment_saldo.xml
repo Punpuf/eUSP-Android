@@ -53,6 +53,7 @@
                 android:layout_marginEnd="@dimen/card_external_margin_horizontal"
                 android:contentDescription="@string/toolbar_settings_btn_description"
                 android:visibility="visible"
+                android:transitionName="trans_dest_settings_main"
                 app:icon="@drawable/ic_settings" />
 
         </LinearLayout>
