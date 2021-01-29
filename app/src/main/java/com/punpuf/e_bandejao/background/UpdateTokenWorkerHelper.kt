@@ -1,11 +1,13 @@
 package com.punpuf.e_bandejao.background
 
 import android.content.Context
+import androidx.preference.PreferenceManager
 import androidx.work.*
 import com.punpuf.e_bandejao.Const.Companion.WORKER_UPDATE_TOKEN_ID
 import com.punpuf.e_bandejao.Const.Companion.WORKER_UPDATE_TOKEN_INITIAL_RETRY_DELAY_MINUTES
 import com.punpuf.e_bandejao.Const.Companion.WORKER_UPDATE_TOKEN_REQUEST_INTERVAL
 import com.punpuf.e_bandejao.Const.Companion.WORKER_UPDATE_TOKEN_START_HOUR_REQUEST
+import com.punpuf.e_bandejao.R
 import timber.log.Timber.d
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -16,8 +18,28 @@ class UpdateTokenWorkerHelper (
 
     fun enqueueUpdateWorkerRequest(existingWorkPolicy: ExistingWorkPolicy) {
         d("Enqueuing work")
+        val preference = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.prefs_qr_code_update_key), context.getString(R.string.prefs_qr_code_update_default_value))
+        var networkType = NetworkType.CONNECTED
+
+        when (preference) {
+            // wifi only
+            context.getString(R.string.prefs_qr_code_update_value_wifi) -> {
+                networkType = NetworkType.UNMETERED
+            }
+            // any network
+            context.getString(R.string.prefs_qr_code_update_value_any_connection) -> {
+                networkType = NetworkType.CONNECTED
+            }
+            // deactivated
+            context.getString(R.string.prefs_qr_code_update_value_deactivated) -> {
+                return
+            }
+        }
+
+        d("Will use the following network type $networkType")
+
         val workConstraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiredNetworkType(networkType)
             .build()
 
         val workRequest = OneTimeWorkRequestBuilder<UpdateTokenWorker>()
@@ -32,6 +54,7 @@ class UpdateTokenWorkerHelper (
     }
 
     fun cancelUpdateWorker() {
+        d("Cancelling work")
         WorkManager.getInstance(context).cancelUniqueWork(WORKER_UPDATE_TOKEN_ID)
     }
 

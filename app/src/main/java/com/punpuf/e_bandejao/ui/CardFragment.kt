@@ -89,14 +89,14 @@ class CardFragment : Fragment() {
         // Click -> Login Button
         loginCardButton.setOnClickListener {
             val action = CardFragmentDirections.actionCardFragmentToLoginFragment()
-            val extras = FragmentNavigatorExtras(it to "trans_dest_login_main")
+            val extras = FragmentNavigatorExtras(it to getString(R.string.transition_to_login_main))
             view.findNavController().navigate(action, extras)
         }
 
         // Click -> Settings
         cardToolbarSettingsBtn.setOnClickListener {
             val action = CardFragmentDirections.actionCardFragmentToSettingsFragment()
-            val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
+            val extras = FragmentNavigatorExtras(it to getString(R.string.transition_to_settings_main))
             findNavController().navigate(action, extras)
         }
 

@@ -24,10 +24,9 @@ class SaldoViewModel @ViewModelInject constructor(
     fun getUserInfo(): LiveData<UserInfo?> {
         userInfoData.addSource(cardRepository.getUserInfo()) {
             userInfoData.postValue(it)
-            if (userInfoOld == null && it != null){
-                newBoletoOp(SaldoState.OP_TYPE.GET)
-                userInfoOld = it
-            }
+            if (userInfoOld == null && it != null) newBoletoOp(SaldoState.OP_TYPE.GET)
+            if (it == null) newBoletoOp(SaldoState.OP_TYPE.NO_USER)
+            userInfoOld = it
         }
         return userInfoData
     }
@@ -55,6 +54,7 @@ class SaldoViewModel @ViewModelInject constructor(
                 SaldoState.OP_TYPE.GET -> { saldoRepo.fetchOngoingBoleto() }
                 SaldoState.OP_TYPE.CREATE -> { saldoRepo.generateBoleto(op.extraAmount) }
                 SaldoState.OP_TYPE.DELETE -> { saldoRepo.cancelBoleto(op.extraId) }
+                SaldoState.OP_TYPE.NO_USER -> { AbsentLiveData.create() }
             }
             ongoingBoletoData.addSource(ongoingBoletoSource!!) {
                 ongoingBoletoData.postValue(it)
@@ -95,6 +95,15 @@ class SaldoViewModel @ViewModelInject constructor(
                     accountBalanceData.postValue(it)
                 }
             }
+        }
+        else if (op.opType == SaldoState.OP_TYPE.NO_USER) {
+            // end previous work
+            accountBalanceJob?.cancel()
+            if (ongoingAccountBalanceSource != null) accountBalanceData.removeSource(ongoingAccountBalanceSource!!)
+
+            // absent data source
+            ongoingAccountBalanceSource = AbsentLiveData.create()
+            accountBalanceData.addSource(ongoingAccountBalanceSource!!) { accountBalanceData.postValue(it) }
         }
 
         accountBalanceData

@@ -37,7 +37,7 @@ class LoginRepository @Inject constructor(
 
     val requestTokenData = MediatorLiveData<Resource<LoginRequestTokenBundle>>()
 
-    suspend fun getRequestTokenBundleData() { //: LiveData<Resource<LoginRequestTokenBundle>> {
+    suspend fun getRequestTokenBundleData() {
 
         withContext(Dispatchers.IO) {
             while (true) {

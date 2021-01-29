@@ -41,7 +41,7 @@
                 android:id="@+id/cardToolbarSettingsBtn"
                 android:layout_marginEnd="@dimen/card_external_margin_horizontal"
                 android:contentDescription="@string/toolbar_settings_btn_description"
-                android:transitionName="trans_dest_settings_main"
+                android:transitionName="@string/transition_to_settings_main"
                 app:icon="@drawable/ic_settings" />
 
             <com.google.android.material.button.MaterialButton

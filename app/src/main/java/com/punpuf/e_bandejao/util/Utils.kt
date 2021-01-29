@@ -1,17 +1,17 @@
 package com.punpuf.e_bandejao.util
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.os.Build
 import android.view.View
-import android.widget.Button
-import androidx.core.app.NotificationManagerCompat
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.work.ExistingWorkPolicy
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import com.punpuf.e_bandejao.R
+import com.punpuf.e_bandejao.background.UpdateTokenWorkerHelper
 import timber.log.Timber.e
 import java.util.*
 
@@ -106,6 +106,49 @@ class Utils {
 
         fun disableButtons(vararg buttons: View) {
             for (btn in buttons) btn.isEnabled = false
+        }
+
+        fun updateUiMode(sharedPreferences: SharedPreferences?, context: Context?) {
+            when (sharedPreferences?.getString(context?.getString(R.string.prefs_ui_mode_key), context?.getString(R.string.prefs_ui_mode_default_value))) {
+                context?.getString(R.string.prefs_ui_mode_value_system) -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+
+                context?.getString(R.string.prefs_ui_mode_value_light) -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+
+                context?.getString(R.string.prefs_ui_mode_value_dark) -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+
+                context?.getString(R.string.prefs_ui_mode_value_time_of_day) -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_TIME)
+                }
+            }
+        }
+
+        fun updateTokenUpdater(sharedPreferences: SharedPreferences?, context: Context) {
+            val updateHelper = UpdateTokenWorkerHelper(context)
+
+            when (sharedPreferences?.getString(context.getString(R.string.prefs_qr_code_update_key), context.getString(R.string.prefs_qr_code_update_default_value))) {
+                // only wifi
+                context.getString(R.string.prefs_qr_code_update_value_wifi) -> {
+                    updateHelper.cancelUpdateWorker()
+                    updateHelper.enqueueUpdateWorkerRequest(ExistingWorkPolicy.REPLACE)
+                }
+
+                // any connection
+                context.getString(R.string.prefs_qr_code_update_value_any_connection) -> {
+                    updateHelper.cancelUpdateWorker()
+                    updateHelper.enqueueUpdateWorkerRequest(ExistingWorkPolicy.REPLACE)
+                }
+
+                // deactivated
+                context.getString(R.string.prefs_qr_code_update_value_deactivated) -> {
+                    updateHelper.cancelUpdateWorker()
+                }
+            }
         }
     }
 }

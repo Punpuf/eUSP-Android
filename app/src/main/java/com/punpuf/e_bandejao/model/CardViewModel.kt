@@ -47,12 +47,6 @@ class CardViewModel @ViewModelInject constructor(
         }
     }
 
-    fun logoutUser() {
-        viewModelScope.launch {
-            cardRepository.logoutUser()
-        }
-    }
-
     private var shouldAutoOpenQrcode: Boolean? = null
     private var shouldAutoOpenBarcode: Boolean? = null
     private var shouldAutoOpenSetTime: Long = 0

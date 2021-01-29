@@ -1,43 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <SwitchPreferenceCompat
-        app:key="ecardUpdates"
-        app:title="Atualização automática do QR code"
-        app:singleLineTitle="false"
-        app:summary="Seu e-card em dia. Sempre no Wi-Fi e durante a madrugada"
-        app:icon="@drawable/ic_qrcode_black" />
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <DropDownPreference
-        app:key="uiMode"
-        app:title="Tema"
+        app:key="@string/prefs_ui_mode_key"
+        app:title="@string/prefs_qr_code_update_title"
+        app:icon="@drawable/ic_dark_mode"
+        app:singleLineTitle="false"
         app:entries="@array/prefsUiModeEntries"
         app:entryValues="@array/prefsUiModeEntriesValue"
-        app:icon="@drawable/ic_dark_mode"/>
+        app:useSimpleSummaryProvider="true"/>
 
-    <Preference
-        app:key="privacy"
-        app:title="Privacidade e dados"
-        app:summary="Sua privacidade é nossa prioridade. Saiba mais sobre que informações coletamos."
-        app:icon="@drawable/ic_insights_black" />
+    <DropDownPreference
+        app:key="@string/prefs_qr_code_update_key"
+        app:title="@string/prefs_ui_mode_title"
+        app:icon="@drawable/ic_qrcode_black"
+        app:singleLineTitle="false"
+        app:entries="@array/prefsQrCodeUpdateEntries"
+        app:entryValues="@array/prefsQrCodeUpdateEntriesValue"
+        app:useSimpleSummaryProvider="true"/>
 
-    <Preference
-        app:key="libraries"
-        app:title="Bibliotecas de código aberto"
-        app:summary="Caminhamos sobre ombros de gigantes. Veja o trabalho de quem permitiu o nosso."
-        app:icon="@drawable/ic_library_books_black" />
+    <PreferenceCategory app:title="@string/prefs_category_more_info">
 
-    <Preference
-        app:key="feedback"
-        app:title="Feedback"
-        app:summary="Gostou? Odiou? Conta prá gente! Suas sugestões nos ajudam a melhorar."
-        app:icon="@drawable/ic_feedback_black" />
+        <Preference
+            app:key="@string/prefs_privacy_key"
+            app:title="@string/prefs_privacy_title"
+            app:singleLineTitle="false"
+            app:summary="@string/prefs_privacy_summary"
+            app:icon="@drawable/ic_insights_black" />
 
-    <Preference
-        app:key="about"
-        app:title="Sobre"
-        app:summary="Projeto open-source feito por uspianos para uspianos. Conheça a página no GitHub."
-        app:icon="@drawable/ic_info_outline" />
+        <Preference
+            app:key="@string/prefs_libraries_key"
+            app:title="@string/prefs_libraries_title"
+            app:singleLineTitle="false"
+            app:summary="@string/prefs_libraries_summary"
+            app:icon="@drawable/ic_library_books_black" />
 
-</PreferenceScreen>
+        <Preference
+            app:key="@string/prefs_feedback_key"
+            app:title="@string/prefs_feedback_title"
+            app:singleLineTitle="false"
+            app:summary="@string/prefs_feedback_summary"
+            app:icon="@drawable/ic_feedback_black" />
+
+        <Preference
+            app:key="@string/prefs_about_key"
+            app:title="@string/prefs_about_title"
+            app:singleLineTitle="false"
+            app:summary="@string/prefs_about_summary"
+            app:icon="@drawable/ic_info_outline" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

@@ -6,7 +6,7 @@
     android:id="@+id/settingsNestedScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionName="trans_dest_settings_main"
+    android:transitionName="@string/transition_to_settings_main"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,25 +51,37 @@
             android:id="@+id/settingsAccountLogoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_logout"
+            android:text="@string/settings_account_logout"
             android:layout_marginVertical="@dimen/padding_normal"
             android:layout_marginHorizontal="@dimen/padding_normal"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@id/settingsAppBar"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/padding_normal"
+            android:layout_marginStart="@dimen/spacing_micro"
+            android:layout_marginEnd="@dimen/spacing_micro"
+            android:contentDescription="@string/settings_account_icon_description"
+            android:src="@drawable/ic_account_box_baseline"
+            android:scaleType="center"
+            app:layout_constraintTop_toBottomOf="@id/settingsAppBar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             style="@style/App.TextAppearance.Body1"
             android:id="@+id/settingsAccountTitleTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@string/settings_account_title"
             android:paddingTop="@dimen/padding_normal"
             android:layout_marginStart="@dimen/keyline_1"
             android:layout_marginEnd="@dimen/padding_normal"
             app:layout_constraintTop_toBottomOf="@id/settingsAppBar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/settingsAccountLogoutBtn"
-            tools:text="Sua Conta"/>
+            app:layout_constraintEnd_toStartOf="@id/settingsAccountLogoutBtn" />
 
         <TextView
             style="@style/App.TextAppearance.Body2"
@@ -89,6 +101,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:name="com.punpuf.e_bandejao.ui.PrefsFragment"
+            android:theme="@style/PrefsTheme"
+            style="@style/PrefsTheme"
             app:layout_constraintTop_toBottomOf="@id/settingsAccountDescriptionTv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

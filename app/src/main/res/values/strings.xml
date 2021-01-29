@@ -103,6 +103,72 @@
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>
-    <string name="settings_logout">Logout</string>
+    <string name="settings_account_logout">Logout</string>
+    <string name="settings_account_title">Sua conta</string>
+    <string name="settings_account_description">%1$s (%2$s)</string>
+    <string name="settings_account_icon_description">Sua conta</string>
+    <string name="settings_account_not_logged_in">Você não está logado</string>
+
+    <!-- Shared element transition -->
+    <string name="transition_to_settings_main" translatable="false">transition_to_settings_main</string>
+    <string name="transition_to_login_main" translatable="false">transition_to_login_main</string>
+
+    <!-- !!!!!!!!!!!!!!!! Preferences !!!!!!!!!!!!!!!! -->
+    <string name="prefs_category_more_info">Informações adicionais</string>
+
+    <!-- QR code -->
+    <string name="prefs_qr_code_update_key" translatable="false">qr_code_update</string>
+    <string name="prefs_qr_code_update_title">Tema</string>
+    <string name="prefs_qr_code_update_default_value">@string/prefs_qr_code_update_value_wifi</string>
+
+    <string name="prefs_qr_code_update_entry_wifi">Apenas no Wi-Fi</string>
+    <string name="prefs_qr_code_update_entry_any_connection">Wi-Fi ou dados móveis</string>
+    <string name="prefs_qr_code_update_entry_deactivated">Desativado</string>
+
+    <string name="prefs_qr_code_update_value_wifi">1</string>
+    <string name="prefs_qr_code_update_value_any_connection">2</string>
+    <string name="prefs_qr_code_update_value_deactivated">3</string>
+
+    <!-- UI mode -->
+    <string name="prefs_ui_mode_key" translatable="false">ui_mode</string>
+    <string name="prefs_ui_mode_title">Atualização diária do QR code</string>
+    <string name="prefs_ui_mode_default_value">@string/prefs_ui_mode_value_system</string>
+
+    <string name="prefs_ui_mode_entry_system">Seguir sistema</string>
+    <string name="prefs_ui_mode_entry_light">Claro</string>
+    <string name="prefs_ui_mode_entry_dark">Escuro</string>
+    <string name="prefs_ui_mode_entry_time_of_day">Horário do dia</string>
+
+    <string name="prefs_ui_mode_value_system">1</string>
+    <string name="prefs_ui_mode_value_light">2</string>
+    <string name="prefs_ui_mode_value_dark">3</string>
+    <string name="prefs_ui_mode_value_time_of_day">4</string>
+
+    <!-- Privacy -->
+    <string name="prefs_privacy_key" translatable="false">privacy</string>
+    <string name="prefs_privacy_title">Privacidade e dados</string>
+    <string name="prefs_privacy_summary">Sua privacidade é nossa prioridade. Saiba mais sobre que informações coletamos.</string>
+    <string name="prefs_privacy_url" translatable="false">https://google.com/privacy</string>
+
+    <!-- Libraries -->
+    <string name="prefs_libraries_key" translatable="false">libraries</string>
+    <string name="prefs_libraries_title">Bibliotecas de código aberto</string>
+    <string name="prefs_libraries_summary">Veja o trabalho dos gigantes que permitiu o nosso.</string>
+    <string name="prefs_libraries_url" translatable="false">https://google.com/libraries</string>
+
+    <!-- Feedback -->
+    <string name="prefs_feedback_key" translatable="false">feedback</string>
+    <string name="prefs_feedback_title">Feedback</string>
+    <string name="prefs_feedback_summary">Gostou? Odiou? Conta pra gente! Suas sugestões nos ajudam a melhorar.</string>
+    <string name="prefs_feedback_url" translatable="false">https://google.com/feedback</string>
+
+    <!-- About -->
+    <string name="prefs_about_key" translatable="false">about</string>
+    <string name="prefs_about_title">Sobre</string>
+    <string name="prefs_about_summary">Projeto open-source feito por uspianos para uspianos. Conheça a página no GitHub.</string>
+    <string name="prefs_about_url" translatable="false">https://google.com/about</string>
+    <!-- todo correct link urls: about, libraries, .. -->
+
+
 
 </resources>

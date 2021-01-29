@@ -72,8 +72,7 @@ class CardRepository @Inject constructor(
                         val tokenExpirationDate = SimpleDateFormat(
                             "yyyy-MM-dd HH:mm:ss",
                             Locale.getDefault()
-                        )
-                            .parse(userProfile.qrCodeTokenExpiration ?: "")
+                        ).parse(userProfile.qrCodeTokenExpiration ?: "")
 
                         val nowCalendar = Calendar.getInstance()
                         val tokenExpirationDateCalendar = Calendar.getInstance()
@@ -180,29 +179,6 @@ class CardRepository @Inject constructor(
                 }
             }
         }.build()
-    }
-
-    suspend fun logoutUser() {
-        withContext(Dispatchers.IO) {
-            try {
-                val wsUserIdToken: Token? = tokenDao.getTokenById(TABLE_TOKEN_VALUE_ID_WS_USER_ID)
-
-                userProfileDao.deleteAllUserProfiles()
-                userInfoDao.deleteAllUserProfiles()
-                profilePictureInfoDao.deleteAll()
-                tokenDao.deleteAllTokens()
-
-                deletePicture()
-
-                updateTokenWorkerHelper.cancelUpdateWorker()
-
-                uspNetworkService.unsubscribeUser(
-                    NetworkRequestBodySubscription(
-                        wsUserIdToken?.token ?: ""
-                    )
-                )
-            } catch (exception: Exception) { e("unsub this error: $exception")}
-        }
     }
 
     private fun deletePicture() {

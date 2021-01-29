@@ -52,8 +52,8 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         NavigationUI.setupWithNavController(loginToolbar, NavHostFragment.findNavController(this))
         loginToolbar.title = ""
@@ -75,8 +75,8 @@ class LoginFragment : Fragment() {
         loginWebView.webViewClient = LoginWebViewClient()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         model.requestTokenBundle.observe(viewLifecycleOwner) {
             when(it.status) {

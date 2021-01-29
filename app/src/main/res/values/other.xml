@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="prefsQrCodeUpdateEntries">
+        <item>@string/prefs_qr_code_update_entry_wifi</item>
+        <item>@string/prefs_qr_code_update_entry_any_connection</item>
+        <item>@string/prefs_qr_code_update_entry_deactivated</item>
+    </array>
+    <array name="prefsQrCodeUpdateEntriesValue">
+        <item>@string/prefs_qr_code_update_value_wifi</item>
+        <item>@string/prefs_qr_code_update_value_any_connection</item>
+        <item>@string/prefs_qr_code_update_value_deactivated</item>
+    </array>
+
     <array name="prefsUiModeEntries">
-        <item>Dark</item>
-        <item>Mode</item>
-        <item>Sistema</item>
-        <item>Horário do Dia</item>
+        <item>@string/prefs_ui_mode_entry_system</item>
+        <item>@string/prefs_ui_mode_entry_light</item>
+        <item>@string/prefs_ui_mode_entry_dark</item>
+        <item>@string/prefs_ui_mode_entry_time_of_day</item>
     </array>
     <array name="prefsUiModeEntriesValue">
-        <item>dark</item>
-        <item>light</item>
-        <item>system</item>
-        <item>time_of_day</item>
+        <item>@string/prefs_ui_mode_value_system</item>
+        <item>@string/prefs_ui_mode_value_light</item>
+        <item>@string/prefs_ui_mode_value_dark</item>
+        <item>@string/prefs_ui_mode_value_time_of_day</item>
     </array>
 </resources>

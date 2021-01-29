@@ -140,6 +140,7 @@ class SaldoFragment : Fragment() {
                 return@observe
             }
 
+            // disable buttons while loading
             if (it.status == Resource.Status.LOADING) {
                 Utils.makeViewsVisible(saldoProgressBar)
                 Utils.disableButtons(
@@ -147,18 +148,17 @@ class SaldoFragment : Fragment() {
                     saldoDepositSubmitBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
-                    saldoDepositEditText,
                 )
             }
+            // enable them afterwards
             else {
                 Utils.makeViewsGone(saldoProgressBar)
                 Utils.enableButtons(
                     saldoToolbarRefreshBtn,
-                    saldoDepositSubmitBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
-                    saldoDepositEditText,
                 )
+                setSubmitBtnState(saldoDepositEditText.text)
             }
 
             // no ongoing boleto
@@ -195,6 +195,14 @@ class SaldoFragment : Fragment() {
         saldoBoletoDeleteBtn.setOnClickListener {
             model.deleteBoleto(boleto.id)
         }
+    }
+
+    private fun setSubmitBtnState(text: Editable?) {
+        var digits = Utils.stringToDigitsNoLeadingZero(text.toString())
+        if (digits.isBlank()) digits = "0"
+        val num = (digits.toInt() / 100.0)
+
+        saldoDepositSubmitBtn.isEnabled = !(num > 200 || num < 20)
     }
 
 }

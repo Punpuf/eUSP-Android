@@ -11,5 +11,6 @@ data class SaldoState(
         GET,
         CREATE,
         DELETE,
+        NO_USER,
     }
 }

@@ -109,7 +109,8 @@ class SaldoRepository @Inject constructor(
 
             override suspend fun saveCallResult(result: NetworkResponseOngoingBoletoList) {
                 boletoDao.deleteAll()
-                if (result.boletoList.isNotEmpty()) {
+
+                if (result.hasError == false && result.boletoList.isNotEmpty()) {
                     d("Going to save the following Boleto: ${result.boletoList[0]}")
                     boletoDao.insertBoleto(result.boletoList[0])
                 }
@@ -143,7 +144,7 @@ class SaldoRepository @Inject constructor(
 
             override suspend fun saveCallResult(result: NetworkResponseOngoingBoletoList) {
                 boletoDao.deleteAll()
-                if (result.boletoList.isNotEmpty()) {
+                if (result.hasError == false && result.boletoList.isNotEmpty()) {
                     d("Going to save the following Boleto: ${result.boletoList[0]}")
                     boletoDao.insertBoleto(result.boletoList[0])
                 }

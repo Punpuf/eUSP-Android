@@ -2,11 +2,29 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccentSecondary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/isWindowStatusBarLight</item>
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:navigationBarColor">@color/navBarColor</item>
         <item name="tabStyle">@style/Widget.App.TabLayout</item>
+
+        <item name="android:textColor">@color/text_dark_high_emphasis_day_night</item>
+        <item name="android:textColorPrimary">@color/text_dark_high_emphasis_day_night</item>
+        <item name="android:textColorSecondary">@color/text_dark_medium_emphasis_day_night</item>
+        <item name="popupMenuBackground">@color/colorPrimary</item>
+        <item name="android:popupMenuStyle">@style/App.PopupMenu</item>
+        <item name="popupTheme">@style/App.PopupMenu</item>
+        <item name="android:popupTheme">@style/App.PopupMenu</item>
+    </style>
+
+    <style name="PrefsTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    </style>
+
+    <style name="App.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="AppDisplayCardStyle">
