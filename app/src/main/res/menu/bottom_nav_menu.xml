@@ -4,7 +4,7 @@
         android:id="@+id/bandejaoFragment"
         android:enabled="true"
         android:icon="@drawable/ic_restaurant_menu"
-        android:title="@string/btm_nav_restaurant"/>
+        android:title="@string/btm_nav_bandejao"/>
     <item
         android:id="@+id/saldoFragment"
         android:enabled="true"
@@ -16,10 +16,10 @@
         android:icon="@drawable/selector_btm_nav_ic_account_box"
         android:title="@string/btm_nav_eCard"/>
 
-    <!--<item
+    <item
         android:id="@+id/libraryFragment"
         android:enabled="true"
         android:icon="@drawable/selector_btm_nav_ic_menu_book"
-        android:title="@string/btm_nav_library"/>-->
+        android:title="@string/btm_nav_library"/>
 
 </menu>

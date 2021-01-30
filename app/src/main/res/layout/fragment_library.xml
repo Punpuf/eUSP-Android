@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/libraryNestedScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.punpuf.e_bandejao.ui.LibraryFragment"
+    tools:background="@color/colorPrimary">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/libraryConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/AppCardToolbarIconBtnStyle"
+            android:id="@+id/libraryToolbarSettingsBtn"
+            android:layout_marginEnd="@dimen/card_external_margin_horizontal"
+            android:contentDescription="@string/toolbar_settings_btn_description"
+            android:visibility="visible"
+            android:transitionName="trans_dest_settings_main"
+            app:icon="@drawable/ic_settings"
+            app:layout_constraintTop_toTopOf="@+id/libraryTitleTv"
+            app:layout_constraintBottom_toBottomOf="@+id/libraryTitleTv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/AppCardToolbarIconBtnStyle"
+            android:id="@+id/libraryToolbarSearchBtn"
+            android:layout_marginEnd="@dimen/padding_normal"
+            android:contentDescription="@string/toolbar_refresh_btn_description"
+            android:visibility="visible"
+            android:enabled="false"
+            app:icon="@drawable/ic_search_black"
+            app:layout_constraintTop_toTopOf="@+id/libraryTitleTv"
+            app:layout_constraintBottom_toBottomOf="@+id/libraryTitleTv"
+            app:layout_constraintEnd_toStartOf="@id/libraryToolbarSettingsBtn"/>
+
+        <TextView
+            style="@style/AppCardMainToolbarStyle"
+            android:id="@+id/libraryTitleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/library_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/libraryToolbarSearchBtn"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

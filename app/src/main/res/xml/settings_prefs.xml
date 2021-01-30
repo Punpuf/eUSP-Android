@@ -3,7 +3,7 @@
 
     <DropDownPreference
         app:key="@string/prefs_ui_mode_key"
-        app:title="@string/prefs_qr_code_update_title"
+        app:title="@string/prefs_ui_mode_title"
         app:icon="@drawable/ic_dark_mode"
         app:singleLineTitle="false"
         app:entries="@array/prefsUiModeEntries"
@@ -12,7 +12,7 @@
 
     <DropDownPreference
         app:key="@string/prefs_qr_code_update_key"
-        app:title="@string/prefs_ui_mode_title"
+        app:title="@string/prefs_qr_code_update_title"
         app:icon="@drawable/ic_qrcode_black"
         app:singleLineTitle="false"
         app:entries="@array/prefsQrCodeUpdateEntries"

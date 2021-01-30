@@ -47,13 +47,13 @@ class SaldoFragment : Fragment() {
         }
 
         // Toolbar buttons: Settings & Refresh
-        saldoToolbarSettingsBtn.setOnClickListener {
+        libraryToolbarSettingsBtn.setOnClickListener {
             val settingsAction = SaldoFragmentDirections.actionSaldoFragmentToSettingsFragment()
             val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
             findNavController().navigate(settingsAction, extras)
         }
 
-        saldoToolbarRefreshBtn.setOnClickListener { model.refreshBoleto() }
+        libraryToolbarSearchBtn.setOnClickListener { model.refreshBoleto() }
 
         // Click -> Login card button
         loginCardButton.setOnClickListener {
@@ -105,8 +105,8 @@ class SaldoFragment : Fragment() {
         })
 
         // Adding Tooltips for Toolbar's Buttons
-        TooltipCompat.setTooltipText(saldoToolbarRefreshBtn, getString(R.string.toolbar_refresh_btn_description))
-        TooltipCompat.setTooltipText(saldoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
+        TooltipCompat.setTooltipText(libraryToolbarSearchBtn, getString(R.string.toolbar_refresh_btn_description))
+        TooltipCompat.setTooltipText(libraryToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
     }
 
     // Model data updates
@@ -116,19 +116,19 @@ class SaldoFragment : Fragment() {
         // indicates if user is logged in
         model.getUserInfo().observe(viewLifecycleOwner) { user ->
             if (user == null) {
-                saldoToolbarRefreshBtn.visibility = View.GONE
-                saldoToolbarRefreshBtn.isEnabled = false
+                libraryToolbarSearchBtn.visibility = View.GONE
+                libraryToolbarSearchBtn.isEnabled = false
                 saldoLoginCardConstraintLayout.visibility = View.VISIBLE
             }
             else {
-                saldoToolbarRefreshBtn.visibility = View.VISIBLE
+                libraryToolbarSearchBtn.visibility = View.VISIBLE
                 saldoLoginCardConstraintLayout.visibility = View.GONE
             }
         }
 
         // account balance
         model.accountBalance.observe(viewLifecycleOwner) {
-            saldoAccountBalanceTv.text = if (it?.data == null) getString(R.string.saldo_title) else getString(R.string.saldo_reais_title_template, it.data)
+            libraryTitleTv.text = if (it?.data == null) getString(R.string.saldo_title) else getString(R.string.saldo_reais_title_template, it.data)
         }
 
         // ongoing boleto data
@@ -144,7 +144,7 @@ class SaldoFragment : Fragment() {
             if (it.status == Resource.Status.LOADING) {
                 Utils.makeViewsVisible(saldoProgressBar)
                 Utils.disableButtons(
-                    saldoToolbarRefreshBtn,
+                    libraryToolbarSearchBtn,
                     saldoDepositSubmitBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
@@ -154,7 +154,7 @@ class SaldoFragment : Fragment() {
             else {
                 Utils.makeViewsGone(saldoProgressBar)
                 Utils.enableButtons(
-                    saldoToolbarRefreshBtn,
+                    libraryToolbarSearchBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
                 )

@@ -1,148 +1,74 @@
 <resources>
-    <string name="app_name">e-Card</string>
 
-    <!-- LOGIN PAGE STRINGS-->
-    <string name="login_app_subtitle">Sua carteirinha digital</string>
-    <string name="login_login_btn_description">Entrar com Conta USP</string>
-    <string name="login_version">Versão %1$d</string>
-    <string name="login_email_us">Entre em contato</string>
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/- GENERAL STRINGS -/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="app_name">e-USP</string>
 
-    <string name="login_title">Login</string>
-
-    <string name="login_state_waiting_request_token_retry">Não deu certo obter a credenciais da solicitação :(\n Tentaremos de novo em alguns segundos</string>
-    <string name="login_state_waiting_access_token_retry">Não deu certo obter as suas informações :(\n Tentaremos de novo em alguns segundos</string>
-    <string name="login_state_fetching_auth_url">Carregando o url do login</string>
-
-    <string name="login_state_fetching_access_token">Quase lá!\nCarregando suas credenciais e informações</string>
-
-    <string name="card_login_title">Faça seu login :D</string>
-    <string name="card_login_button">Entrar com USP</string>
-    <string name="login_card_description">Acesse seu saldo e carteirinha com total segurança!</string>
-
-    <!-- CARD LAYOUT STRINGS -->
-    <string name="card_ecard_profile_pic_content_description">Foto de perfil da carteirinha</string>
-    <string name="card_ecard_usp_logo_content_description">Logo da USP</string>
-    <string name="card_ecard_usp_logo_subtitle">Universidade de São Paulo</string>
-    <string name="card_ecard_expiration_date">Validade\n%1$s</string>
-
-    <string name="card_qrcode_title">Código QR</string>
-    <string name="card_qrcode_content_description">@string/card_qrcode_title</string>
-    <string name="card_qrcode_refresh_btn">Recarregar</string>
-
-    <string name="card_barcode_title">Código de Barras</string>
-    <string name="card_barcode_content_description">@string/card_barcode_title</string>
-    <string name="card_barcode_code">Número USP: %1$s</string>
-
-    <string name="card_qrcode_expiration_date_msg_today_valid">Dados válidos\nExpira hoje às %1$s</string>
-    <string name="card_qrcode_expiration_date_msg_future_valid">Dados válidos\nExpira dia %1$s às %2$s</string>
-    <string name="card_qrcode_expiration_date_msg_invalid">Dados inválidos\nExpirou dia %1$s às %2$s</string>
-
-    <string name="card_qrcode_expiration_date_state_valid">Válido · </string>
-    <string name="card_qrcode_expiration_date_state_invalid_successful">Dados inválidos</string>
-    <string name="card_qrcode_expiration_date_state_invalid_loading">Dados inválidos\nAtualizando…</string>
-    <string name="card_qrcode_expiration_date_state_invalid_error">Dados inválidos\nErro ao carregar, tentaremos novamente em 10s</string>
-    <string name="card_qrcode_expiration_date_state_undetermined">Não disponível no momento</string>
-
-    <string name="card_qrcode_toast_unavailable">O código QR ainda não foi carregado :(</string>
-
+    <!-- Toolbar -->
     <string name="toolbar_profile_change_btn_description">Trocar Perfil</string>
     <string name="toolbar_settings_btn_description">Configurações</string>
     <string name="toolbar_refresh_btn_description">Atualizar Informações</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_qrcode_label">Código QR</string>
-    <string name="shortcut_barcode_label">C. de Barras</string>
-
+    <string name="shortcut_barcode_label">C. Barras</string>
     <string name="shortcut_code_disabled_msg">Você não está logado :(</string>
-    
-    <!-- Saldo -->
-    <string name="saldo_title">Saldo Bandeco</string>
-    <string name="saldo_deposit_title">Quanto você quer\ndepositar?</string>
-    <string name="saldo_deposit_button">Gerar Boleto</string>
-    <string name="saldo_deposit_edit_text_init" translatable="false">0,00</string>
-    <string name="saldo_reais_template" translatable="false">R$%1$s</string>
-    <string name="saldo_reais_title_template" >Saldo: R$%1$s</string>
-    <string name="saldo_boleto_ongoing">O boleto de depósito de\nR$ %1$s está em aberto</string>
-    <string name="saldo_boleto_copy_code">Copiar Código</string>
-    <string name="saldo_boleto_code_copied">Código Copiado</string>
-    <string name="saldo_boleto_delete">Cancelar Boleto</string>
-    <string name="saldo_boleto_description">Código de Barras do seu Boleto</string>
-    <string name="saldo_boleto_expiration_date">Valido até %1$s</string>
-    <string name="saldo_deposit_input_range">Digite um valor entre R$ 20,00 e R$ 200,00</string>
 
     <!-- Btm nav -->
-    <string name="btm_nav_eCard">e-Card</string>
-    <string name="btm_nav_restaurant">Bandejão</string>
+    <string name="btm_nav_bandejao">Bandejão</string>
     <string name="btm_nav_account_balance">Saldo</string>
+    <string name="btm_nav_eCard">e-Card</string>
     <string name="btm_nav_library">Biblioteca</string>
-
-    <!-- Bandejao -->
-    <string name="bandejao_title">Cardápio</string>
-    <string name="bandejao_lunch">Almoço</string>
-    <string name="bandejao_lunch_calories">Almoço (%1$s kcal)</string>
-    <string name="bandejao_dinner">Janta</string>
-    <string name="bandejao_dinner_calories">Janta (%1$s kcal)</string>
-    
-    <string name="bandejao_content_empty">Refeição não encontrada :(</string>
-    <string name="bandejao_dropdown_description">Selecionar Restaurantes</string>
-
-    <!-- List Restaurants -->
-    <string name="list_restaurants_title">Selecione seu Bandejão</string>
-    <string name="restaurant_info_thumbnail_description">Foto do restaurante</string>
-    <string name="restaurant_info_hours_weekdays">Segunda-sexta: %1$s</string>
-    <string name="restaurant_info_hours_saturday">Sábado: %1$s</string>
-    <string name="restaurant_info_hours_sunday">Domingo: %1$s</string>
-    <string name="restaurant_info_location">%1$s (%2$s %3$s)</string>
-    
-    <string name="restaurant_info_hours_title">Horários</string>
-    <string name="restaurant_info_location_title">Endereço</string>
-    <string name="restaurant_info_selling_point_title">Pontos de venda</string>
-    <string name="restaurant_info_phone_title">Telefone</string>
-
-    <string name="restaurant_list_info_btn_description">Ver informações do bandejão</string>
-
-    <!-- Settings -->
-    <string name="settings_title">Configurações</string>
-    <string name="settings_account_logout">Logout</string>
-    <string name="settings_account_title">Sua conta</string>
-    <string name="settings_account_description">%1$s (%2$s)</string>
-    <string name="settings_account_icon_description">Sua conta</string>
-    <string name="settings_account_not_logged_in">Você não está logado</string>
 
     <!-- Shared element transition -->
     <string name="transition_to_settings_main" translatable="false">transition_to_settings_main</string>
     <string name="transition_to_login_main" translatable="false">transition_to_login_main</string>
 
-    <!-- !!!!!!!!!!!!!!!! Preferences !!!!!!!!!!!!!!!! -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/- SETTINGS STRINGS /-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_account_logout">Logout</string>
+    <string name="settings_account_title">Sua conta</string>
+    <string name="settings_account_description">%1$s (%2$s)</string>
+    <string name="settings_account_icon_description">@string/settings_account_title</string>
+    <string name="settings_account_not_logged_in">Você não está logado</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/- PREFERENCES -/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- todo correct link urls: about, libraries, .. -->
     <string name="prefs_category_more_info">Informações adicionais</string>
 
     <!-- QR code -->
+    <string name="prefs_qr_code_update_title">Atualização diária do QR code</string>
     <string name="prefs_qr_code_update_key" translatable="false">qr_code_update</string>
-    <string name="prefs_qr_code_update_title">Tema</string>
-    <string name="prefs_qr_code_update_default_value">@string/prefs_qr_code_update_value_wifi</string>
 
     <string name="prefs_qr_code_update_entry_wifi">Apenas no Wi-Fi</string>
     <string name="prefs_qr_code_update_entry_any_connection">Wi-Fi ou dados móveis</string>
     <string name="prefs_qr_code_update_entry_deactivated">Desativado</string>
 
-    <string name="prefs_qr_code_update_value_wifi">1</string>
-    <string name="prefs_qr_code_update_value_any_connection">2</string>
-    <string name="prefs_qr_code_update_value_deactivated">3</string>
+    <string name="prefs_qr_code_update_default_value" translatable="false">@string/prefs_qr_code_update_value_wifi</string>
+    <string name="prefs_qr_code_update_value_wifi" translatable="false">1</string>
+    <string name="prefs_qr_code_update_value_any_connection" translatable="false">2</string>
+    <string name="prefs_qr_code_update_value_deactivated" translatable="false">3</string>
 
     <!-- UI mode -->
+    <string name="prefs_ui_mode_title">Tema</string>
     <string name="prefs_ui_mode_key" translatable="false">ui_mode</string>
-    <string name="prefs_ui_mode_title">Atualização diária do QR code</string>
-    <string name="prefs_ui_mode_default_value">@string/prefs_ui_mode_value_system</string>
+
 
     <string name="prefs_ui_mode_entry_system">Seguir sistema</string>
     <string name="prefs_ui_mode_entry_light">Claro</string>
     <string name="prefs_ui_mode_entry_dark">Escuro</string>
     <string name="prefs_ui_mode_entry_time_of_day">Horário do dia</string>
 
-    <string name="prefs_ui_mode_value_system">1</string>
-    <string name="prefs_ui_mode_value_light">2</string>
-    <string name="prefs_ui_mode_value_dark">3</string>
-    <string name="prefs_ui_mode_value_time_of_day">4</string>
+    <string name="prefs_ui_mode_default_value" translatable="false">@string/prefs_ui_mode_value_system</string>
+    <string name="prefs_ui_mode_value_system" translatable="false">1</string>
+    <string name="prefs_ui_mode_value_light" translatable="false">2</string>
+    <string name="prefs_ui_mode_value_dark" translatable="false">3</string>
+    <string name="prefs_ui_mode_value_time_of_day" translatable="false">4</string>
 
     <!-- Privacy -->
     <string name="prefs_privacy_key" translatable="false">privacy</string>
@@ -167,8 +93,99 @@
     <string name="prefs_about_title">Sobre</string>
     <string name="prefs_about_summary">Projeto open-source feito por uspianos para uspianos. Conheça a página no GitHub.</string>
     <string name="prefs_about_url" translatable="false">https://google.com/about</string>
-    <!-- todo correct link urls: about, libraries, .. -->
 
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/- LOGIN STRINGS -/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="login_title">Login</string>
 
+    <string name="login_state_waiting_request_token_retry">Não deu certo obter a credenciais da solicitação :(\n Tentaremos de novo em alguns segundos</string>
+    <string name="login_state_waiting_access_token_retry">Não deu certo obter as suas informações :(\n Tentaremos de novo em alguns segundos</string>
+    <string name="login_state_fetching_auth_url">Carregando o url do login</string>
+    <string name="login_state_fetching_access_token">Quase lá!\nCarregando suas credenciais e informações</string>
+
+    <string name="login_card_title">Faça seu login :D</string>
+    <string name="login_card_button">Entrar com USP</string>
+    <string name="login_card_description">Acesse seu saldo e carteirinha com total segurança!</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/ BANDEJAO STRINGS -/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="bandejao_title">Cardápio</string>
+
+    <string name="bandejao_lunch">Almoço</string>
+    <string name="bandejao_lunch_calories">Almoço (%1$s kcal)</string>
+    <string name="bandejao_dinner">Janta</string>
+    <string name="bandejao_dinner_calories">Janta (%1$s kcal)</string>
+
+    <string name="bandejao_content_empty">Refeição não encontrada :(</string>
+    <string name="bandejao_dropdown_description">Selecionar Restaurantes</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/- List&Info Restaurants -/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="restaurant_list_title">Selecione seu Bandejão</string>
+    <string name="restaurant_list_info_btn_description">Ver informações do bandejão</string>
+
+    <string name="restaurant_info_thumbnail_description">Foto do restaurante</string>
+    <string name="restaurant_info_hours_weekdays">Segunda-sexta: %1$s</string>
+    <string name="restaurant_info_hours_saturday">Sábado: %1$s</string>
+    <string name="restaurant_info_hours_sunday">Domingo: %1$s</string>
+    <string name="restaurant_info_hours_title">Horários</string>
+    <string name="restaurant_info_location_title">Endereço</string>
+    <string name="restaurant_info_selling_point_title">Pontos de venda</string>
+    <string name="restaurant_info_phone_title">Telefone</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/- SALDO STRINGS -/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="saldo_title">Saldo Bandeco</string>
+
+    <string name="saldo_deposit_title">Quanto você quer\ndepositar?</string>
+    <string name="saldo_deposit_button">Gerar Boleto</string>
+    <string name="saldo_deposit_edit_text_init" translatable="false">0,00</string>
+
+    <string name="saldo_reais_template" translatable="false">R$%1$s</string>
+    <string name="saldo_reais_title_template" >Saldo: R$%1$s</string>
+
+    <string name="saldo_boleto_ongoing">O boleto de depósito de\nR$ %1$s está em aberto</string>
+    <string name="saldo_boleto_copy_code">Copiar Código</string>
+    <string name="saldo_boleto_code_copied">Código Copiado</string>
+    <string name="saldo_boleto_delete">Cancelar Boleto</string>
+    <string name="saldo_boleto_expiration_date">Valido até %1$s</string>
+    <string name="saldo_deposit_input_range">Digite um valor entre R$ 20,00 e R$ 200,00</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/- E-CARD STRINGS /-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="card_title">e-Card</string>
+
+    <string name="card_ecard_profile_pic_content_description">Foto de perfil da carteirinha</string>
+    <string name="card_ecard_usp_logo_content_description">Logo da USP</string>
+    <string name="card_ecard_usp_logo_subtitle">Universidade de São Paulo</string>
+    <string name="card_ecard_expiration_date">Validade\n%1$s</string>
+
+    <string name="card_qrcode_title">Código QR</string>
+    <string name="card_qrcode_content_description">@string/card_qrcode_title</string>
+    <string name="card_qrcode_refresh_btn">Recarregar</string>
+
+    <string name="card_barcode_title">Código de Barras</string>
+    <string name="card_barcode_content_description">@string/card_barcode_title</string>
+    <string name="card_barcode_code">Número USP: %1$s</string>
+
+    <string name="card_qrcode_expiration_date_msg_today_valid">Dados válidos\nExpira hoje às %1$s</string>
+    <string name="card_qrcode_expiration_date_msg_future_valid">Dados válidos\nExpira dia %1$s às %2$s</string>
+    <string name="card_qrcode_expiration_date_msg_invalid">Dados inválidos\nExpirou dia %1$s às %2$s</string>
+
+    <string name="card_qrcode_expiration_date_state_invalid_successful">Dados inválidos</string>
+    <string name="card_qrcode_expiration_date_state_invalid_loading">Dados inválidos\nAtualizando…</string>
+    <string name="card_qrcode_expiration_date_state_invalid_error">Dados inválidos\nErro ao carregar, tentaremos novamente em 10s</string>
+
+    <string name="card_qrcode_toast_unavailable">O código QR ainda não foi carregado :(</string>
+
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/- LIBRARY -/-/-/-/-/-/-/- -->
+    <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
+    <string name="library_title">Biblioteca</string>
 
 </resources>

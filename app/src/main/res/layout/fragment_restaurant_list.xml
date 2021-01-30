@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionName="bandeco_to_frag_restaurant"
-    tools:background="@color/colorPrimary">
+    tools:background="@color/colorPrimary"
+    tools:context="com.punpuf.e_bandejao.ui.RestaurantListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/restaurantListAppBar"
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/list_restaurants_title"
+                android:text="@string/restaurant_list_title"
                 tools:layout_marginStart="72dp"/>
 
         </androidx.appcompat.widget.Toolbar>

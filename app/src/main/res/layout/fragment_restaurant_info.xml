@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MissingConstraints"
-    tools:background="@color/colorPrimary">
+    tools:background="@color/colorPrimary"
+    tools:context="com.punpuf.e_bandejao.ui.RestaurantInfoFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/restaurantInfoAppBar"

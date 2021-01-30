@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:targetApi="lollipop">
+    tools:targetApi="lollipop"
+    tools:context="com.punpuf.e_bandejao.ui.CardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardMainLinearLayout"
@@ -33,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/app_name"
+                android:text="@string/card_title"
                 android:textSize="28sp" />
 
             <com.google.android.material.button.MaterialButton

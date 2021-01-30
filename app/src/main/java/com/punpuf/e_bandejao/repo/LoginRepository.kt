@@ -35,13 +35,11 @@ class LoginRepository @Inject constructor(
     private val uspNetworkService: UspNetworkService,
 ) {
 
+    // Getting request token, then auth url
     val requestTokenData = MediatorLiveData<Resource<LoginRequestTokenBundle>>()
-
     suspend fun getRequestTokenBundleData() {
-
         withContext(Dispatchers.IO) {
             while (true) {
-
                 requestTokenData.postValue(Resource.Loading())
 
                 try {
@@ -61,14 +59,12 @@ class LoginRepository @Inject constructor(
 
             }
         }
-        d("RETURNING DATA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        //return data
     }
 
-
+    // Gets access token, authenticate user (getting their info), subscribe/register user key
+    // store response
     val accessTokenStateData = MediatorLiveData<Resource<String>>()
-
-    suspend fun fetchAndStoreAccessToken(accessTokenBundle: LoginAccessTokenBundle) { //: LiveData<Resource<String>> {
+    suspend fun fetchAndStoreAccessToken(accessTokenBundle: LoginAccessTokenBundle) {
         withContext(Dispatchers.IO) {
             while (true) { // todo add a check to see if should still continue
 
@@ -161,9 +157,6 @@ class LoginRepository @Inject constructor(
                 return@withContext
             }
         }
-
-        d("RETURNING DATA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        //return accessTokenStateData
     }
 
 }

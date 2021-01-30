@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context="com.punpuf.e_bandejao.ui.SaldoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
 
             <TextView
                 style="@style/AppCardMainToolbarStyle"
-                android:id="@+id/saldoAccountBalanceTv"
+                android:id="@+id/libraryTitleTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/saldo_title"
@@ -40,7 +41,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/AppCardToolbarIconBtnStyle"
-                android:id="@+id/saldoToolbarRefreshBtn"
+                android:id="@+id/libraryToolbarSearchBtn"
                 android:layout_marginEnd="@dimen/padding_normal"
                 android:contentDescription="@string/toolbar_refresh_btn_description"
                 android:visibility="visible"
@@ -49,7 +50,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/AppCardToolbarIconBtnStyle"
-                android:id="@+id/saldoToolbarSettingsBtn"
+                android:id="@+id/libraryToolbarSettingsBtn"
                 android:layout_marginEnd="@dimen/card_external_margin_horizontal"
                 android:contentDescription="@string/toolbar_settings_btn_description"
                 android:visibility="visible"
@@ -175,7 +176,7 @@
                 app:layout_constraintTop_toBottomOf="@id/saldoBoletoExpirationDateTv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="00190.00009\n02844.474003\n00424.603173 1\n84330000002521"/>
+                tools:text="00190.00009\n02844.474003\n00424.603173\n1\n84330000002521"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.App.Button.Contained"
