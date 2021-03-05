@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:targetApi="lollipop"
-    tools:context="com.punpuf.e_bandejao.ui.CardFragment">
+    tools:context="com.punpuf.e_usp.ui.CardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardMainLinearLayout"

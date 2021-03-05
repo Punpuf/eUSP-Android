@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:transitionName="@string/transition_to_login_main"
-    tools:context="com.punpuf.e_bandejao.ui.LoginFragment">
+    tools:context="com.punpuf.e_usp.ui.LoginFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/loginAppBar"

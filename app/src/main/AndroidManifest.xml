@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.punpuf.e_bandejao">
+    package="com.punpuf.e_usp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" tools:node="remove"/>
@@ -11,7 +11,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name="Application"
+        android:name="com.punpuf.e_usp.Application"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -20,12 +20,12 @@
 
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="com.punpuf.e_bandejao.workmanager-init"
+            android:authorities="com.punpuf.e_usp.workmanager-init"
             tools:node="remove"
             tools:ignore="ExportedContentProvider" />
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.punpuf.e_usp.ui.MainActivity"
             android:persistableMode="persistAcrossReboots"
             android:windowSoftInputMode="adjustPan"
             tools:targetApi="lollipop">

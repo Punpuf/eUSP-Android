@@ -9,7 +9,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId 'com.punpuf.e_bandejao'
+        applicationId 'com.punpuf.e_usp'
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

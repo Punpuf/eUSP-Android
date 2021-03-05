@@ -6,7 +6,7 @@
     android:id="@+id/libraryNestedScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.punpuf.e_bandejao.ui.LibraryFragment"
+    tools:context="com.punpuf.e_usp.ui.LibraryFragment"
     tools:background="@color/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout

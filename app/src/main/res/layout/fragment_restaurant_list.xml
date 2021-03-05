@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:transitionName="bandeco_to_frag_restaurant"
     tools:background="@color/colorPrimary"
-    tools:context="com.punpuf.e_bandejao.ui.RestaurantListFragment">
+    tools:context="com.punpuf.e_usp.ui.RestaurantListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/restaurantListAppBar"

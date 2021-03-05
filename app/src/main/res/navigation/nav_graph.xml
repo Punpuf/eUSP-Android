@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/cardFragment"
-        android:name="com.punpuf.e_bandejao.ui.CardFragment"
+        android:name="com.punpuf.e_usp.ui.CardFragment"
         android:label="CardFragment">
         <deepLink
             android:id="@+id/deepLink"
@@ -26,12 +26,12 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.punpuf.e_bandejao.ui.LoginFragment"
+        android:name="com.punpuf.e_usp.ui.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/fragment_login" />
     <dialog
         android:id="@+id/codeDisplayDialogFragment"
-        android:name="com.punpuf.e_bandejao.ui.CodeDisplayDialogFragment"
+        android:name="com.punpuf.e_usp.ui.CodeDisplayDialogFragment"
         android:label="CodeDisplayDialogFragment" >
         <argument
             android:name="codeType"
@@ -42,7 +42,7 @@
     </dialog>
     <fragment
         android:id="@+id/bandejaoFragment"
-        android:name="com.punpuf.e_bandejao.ui.BandejaoFragment"
+        android:name="com.punpuf.e_usp.ui.BandejaoFragment"
         android:label="BandejaoFragment" >
         <action
             android:id="@+id/action_bandejaoFragment_to_restaurantListFragment"
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/saldoFragment"
-        android:name="com.punpuf.e_bandejao.ui.SaldoFragment"
+        android:name="com.punpuf.e_usp.ui.SaldoFragment"
         android:label="SaldoFragment" >
         <action
             android:id="@+id/action_saldoFragment_to_loginFragment"
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/restaurantListFragment"
-        android:name="com.punpuf.e_bandejao.ui.RestaurantListFragment"
+        android:name="com.punpuf.e_usp.ui.RestaurantListFragment"
         android:label="RestaurantListFragment">
         <action
             android:id="@+id/action_restaurantListFragment_to_restaurantInfoFragment"
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/restaurantInfoFragment"
-        android:name="com.punpuf.e_bandejao.ui.RestaurantInfoFragment"
+        android:name="com.punpuf.e_usp.ui.RestaurantInfoFragment"
         android:label="RestaurantInfoFragment" >
         <argument
             android:name="restaurant"
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.punpuf.e_bandejao.ui.LibraryFragment"
+        android:name="com.punpuf.e_usp.ui.LibraryFragment"
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_loginFragment"
@@ -98,6 +98,6 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.punpuf.e_bandejao.ui.SettingsFragment"
+        android:name="com.punpuf.e_usp.ui.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>
