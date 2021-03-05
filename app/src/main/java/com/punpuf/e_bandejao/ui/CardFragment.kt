@@ -17,8 +17,6 @@ import androidx.navigation.fragment.findNavController
 import com.punpuf.e_bandejao.Const
 import com.punpuf.e_bandejao.Const.Companion.SHORTCUT_BARCODE_INTENT_DATA
 import com.punpuf.e_bandejao.Const.Companion.SHORTCUT_QRCODE_INTENT_DATA
-import com.punpuf.e_bandejao.Const.Companion.TRANSITION_CODE_DIALOG_INNER_IMAGE
-import com.punpuf.e_bandejao.Const.Companion.TRANSITION_CODE_DIALOG_OUTER_CARD
 import com.punpuf.e_bandejao.util.Utils
 import com.punpuf.e_bandejao.model.CardViewModel
 import com.punpuf.e_bandejao.vo.ProfilePictureInfo

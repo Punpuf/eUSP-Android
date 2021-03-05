@@ -47,13 +47,13 @@ class SaldoFragment : Fragment() {
         }
 
         // Toolbar buttons: Settings & Refresh
-        libraryToolbarSettingsBtn.setOnClickListener {
+        saldoToolbarSettingsBtn.setOnClickListener {
             val settingsAction = SaldoFragmentDirections.actionSaldoFragmentToSettingsFragment()
             val extras = FragmentNavigatorExtras(it to "trans_dest_settings_main")
             findNavController().navigate(settingsAction, extras)
         }
 
-        libraryToolbarSearchBtn.setOnClickListener { model.refreshBoleto() }
+        saldoToolbarRefreshBtn.setOnClickListener { model.refreshBoleto() }
 
         // Click -> Login card button
         loginCardButton.setOnClickListener {
@@ -105,8 +105,8 @@ class SaldoFragment : Fragment() {
         })
 
         // Adding Tooltips for Toolbar's Buttons
-        TooltipCompat.setTooltipText(libraryToolbarSearchBtn, getString(R.string.toolbar_refresh_btn_description))
-        TooltipCompat.setTooltipText(libraryToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
+        TooltipCompat.setTooltipText(saldoToolbarRefreshBtn, getString(R.string.toolbar_refresh_btn_description))
+        TooltipCompat.setTooltipText(saldoToolbarSettingsBtn, getString(R.string.toolbar_settings_btn_description))
     }
 
     // Model data updates
@@ -116,12 +116,12 @@ class SaldoFragment : Fragment() {
         // indicates if user is logged in
         model.getUserInfo().observe(viewLifecycleOwner) { user ->
             if (user == null) {
-                libraryToolbarSearchBtn.visibility = View.GONE
-                libraryToolbarSearchBtn.isEnabled = false
+                saldoToolbarRefreshBtn.visibility = View.GONE
+                saldoToolbarRefreshBtn.isEnabled = false
                 saldoLoginCardConstraintLayout.visibility = View.VISIBLE
             }
             else {
-                libraryToolbarSearchBtn.visibility = View.VISIBLE
+                saldoToolbarRefreshBtn.visibility = View.VISIBLE
                 saldoLoginCardConstraintLayout.visibility = View.GONE
             }
         }
@@ -144,7 +144,7 @@ class SaldoFragment : Fragment() {
             if (it.status == Resource.Status.LOADING) {
                 Utils.makeViewsVisible(saldoProgressBar)
                 Utils.disableButtons(
-                    libraryToolbarSearchBtn,
+                    saldoToolbarRefreshBtn,
                     saldoDepositSubmitBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
@@ -154,7 +154,7 @@ class SaldoFragment : Fragment() {
             else {
                 Utils.makeViewsGone(saldoProgressBar)
                 Utils.enableButtons(
-                    libraryToolbarSearchBtn,
+                    saldoToolbarRefreshBtn,
                     saldoBoletoCopyCodeBtn,
                     saldoBoletoDeleteBtn,
                 )

@@ -15,11 +15,10 @@ class CardViewModel @ViewModelInject constructor(
     private val cardRepository: CardRepository,
 ) : ViewModel() {
 
-    private val userProfileListData = MediatorLiveData<Resource<List<UserProfile>>>()
-    private val userProfilePictureData = MediatorLiveData<Resource<ProfilePictureInfo?>>()
-
     val userInfo: LiveData<UserInfo?> = cardRepository.getUserInfo()
 
+    private val userProfileListData = MediatorLiveData<Resource<List<UserProfile>>>()
+    private val userProfilePictureData = MediatorLiveData<Resource<ProfilePictureInfo?>>()
     val userProfileList: LiveData<Resource<List<UserProfile>>> = Transformations.switchMap(userInfo) { userInfo ->
         d("userProfileListData - init: $userInfo")
         if (userInfo == null) { AbsentLiveData.create<Resource<List<UserProfile>>>() }

@@ -2,12 +2,17 @@ package com.punpuf.e_bandejao
 
 class Const {
     companion object {
+        /*
+            ******************************
+            ********** DATABASE **********
+            ******************************
+         */
         const val ERROR_NETWORK = 20
         const val ERROR_INTERNAL = 21
         const val ERROR_UNKNOWN = 22
         const val ERROR_SERVER_DENIED = 23
 
-        const val DB_CARD_NAME = "database_card"
+        const val DB_CARD_NAME = "database"
         const val DB_CARD_VERSION = 1
 
         // Table for the long lasting Tokens
@@ -73,6 +78,22 @@ class Const {
         const val TABLE_SELECTED_RESTAURANT_ID = "table_selected_id"
         const val TABLE_SELECTED_RESTAURANT_SELECTION_DATE = "table_selected_selection_date"
 
+        // Table for Book User
+        const val TABLE_BOOK_USER = "table_book_user"
+        const val TABLE_BOOK_USER_SYS_NO = "table_book_user_sys_no"
+        const val TABLE_BOOK_USER_TYPE = "table_book_user_type"
+        const val TABLE_BOOK_USER_ITEM_SEQ = "table_book_user_item_seq"
+        const val TABLE_BOOK_USER_HOLD_SEQ = "table_book_user_hold_seq"
+        const val TABLE_BOOK_USER_CALL_NO = "table_book_user_call_no"
+        const val TABLE_BOOK_USER_TITLE = "table_book_user_title"
+        const val TABLE_BOOK_USER_AUTHORS = "table_book_user_authors"
+        const val TABLE_BOOK_USER_LIBRARY_CODE = "table_book_user_library_code"
+        const val TABLE_BOOK_USER_LIBRARY_NAME = "table_book_user_library_name"
+        const val TABLE_BOOK_USER_MEDIA_TYPE = "table_book_user_media_type"
+        const val TABLE_BOOK_USER_DUE_DATE = "table_book_user_due_date"
+        const val TABLE_BOOK_USER_RETURN_DATE = "table_book_user_return_date"
+        const val TABLE_BOOK_USER_NO_RENEW = "table_book_user_no_renew"
+
         //URL Endpoints for Network Services
         const val NETWORK_BASE_URL = "https://uspdigital.usp.br/"
         const val NETWORK_ENDPOINT_LIST_PROFILES = "mobile/servicos/ecard/listarPerfis"
@@ -91,12 +112,15 @@ class Const {
 
         const val NETWORK_URL_CUSTOM_RESTAURANT_LIST = "https://firebasestorage.googleapis.com/v0/b/e-bandejao-usp-beta.appspot.com/o/usp-restaurant-list.json"
 
+        const val NETWORK_BASE_LIBRARY = "https://wssibi.uspdigital.usp.br/"
+        const val NETWORK_ENDPOINT_LIBRARY_MAIN = "mobile/WExecute.php"
+        const val NETWORK_ENDPOINT_LIBRARY_SEARCH = "mobile/WSearch.php"
+        const val NETWORK_ENDPOINT_LIBRARY_LIBRARIES = "mobile/WLibrary.php"
+
+
         // Profile Picture File Storage
         const val FILE_ID_PROFILE_PIC = 200
         const val FILE_NAME_PROFILE_PIC = "profile_pic"
-
-        const val TRANSITION_CODE_DIALOG_OUTER_CARD = "transition_code_dialog_outer_card"
-        const val TRANSITION_CODE_DIALOG_INNER_IMAGE = "transition_code_dialog_inner_image"
 
         // Work Manager
         const val WORKER_UPDATE_TOKEN_ID = "worker_update_token"

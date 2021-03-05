@@ -84,16 +84,14 @@ class RestaurantListFragment : Fragment(), RestaurantListItemClickListener {
         val clickInterface: RestaurantListItemClickListener,
     ) : RecyclerView.Adapter<RestaurantListRecyclerViewHolder>() {
 
-        var data: List<Restaurant> = emptyList()
+        private var data: List<Restaurant> = emptyList()
 
         fun updateData (newData: List<Restaurant>) {
             data = newData
             notifyDataSetChanged()
         }
 
-        override fun onCreateViewHolder(
-            parent: ViewGroup, viewType: Int
-        ): RestaurantListRecyclerViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantListRecyclerViewHolder {
             return RestaurantListRecyclerViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item_select_restaurant, parent, false)

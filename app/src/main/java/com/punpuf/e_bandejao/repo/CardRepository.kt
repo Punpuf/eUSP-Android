@@ -125,20 +125,13 @@ class CardRepository @Inject constructor(
             }
 
             override suspend fun shouldFetch(data: ProfilePictureInfo?): Boolean {
-                d("getProfilePictureInfo - shouldFetch $data")
                 if (tokenDao.getTokenById(TABLE_TOKEN_VALUE_ID_WS_USER_ID) == null) return false
                 if (data == null) return true
-                d("getProfilePictureInfo - shouldFetch - 222222")
+
                 val currentTime = System.currentTimeMillis()
                 val previousDownloadTime = data.downloadDate
                 val diff = currentTime - previousDownloadTime
-                d(
-                    "getProfilePictureInfo - shouldFetch - 333333 - ${
-                        (TimeUnit.MILLISECONDS.toDays(
-                            diff
-                        ) > 7)
-                    }}"
-                )
+
                 // refreshes if current pic is older than a week
                 return (TimeUnit.MILLISECONDS.toDays(diff) > 7)
             }

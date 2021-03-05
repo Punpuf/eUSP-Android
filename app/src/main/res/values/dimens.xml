@@ -60,4 +60,6 @@
 
     <dimen name="surface_clickable_radius">16dp</dimen>
 
+    <dimen name="keyline_1_minus_padding">56dp</dimen>
+
 </resources>

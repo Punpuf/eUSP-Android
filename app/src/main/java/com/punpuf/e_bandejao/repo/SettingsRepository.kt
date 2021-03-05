@@ -22,6 +22,7 @@ class SettingsRepository @Inject constructor(
     private val userInfoDao: UserInfoDao,
     private val profilePictureInfoDao: ProfilePictureInfoDao,
     private val boletoDao: BoletoDao,
+    private val bookUserDao: BookUserDao,
     private val uspNetworkService: UspNetworkService,
     private val updateTokenWorkerHelper: UpdateTokenWorkerHelper,
 ) {
@@ -40,6 +41,8 @@ class SettingsRepository @Inject constructor(
                 profilePictureInfoDao.deleteAll()
                 tokenDao.deleteAllTokens()
                 boletoDao.deleteAll()
+                bookUserDao.deleteAll()
+
 
                 deletePicture()
 

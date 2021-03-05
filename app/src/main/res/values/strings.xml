@@ -9,6 +9,7 @@
     <string name="toolbar_profile_change_btn_description">Trocar Perfil</string>
     <string name="toolbar_settings_btn_description">Configurações</string>
     <string name="toolbar_refresh_btn_description">Atualizar Informações</string>
+    <string name="toolbar_search_btn_description">Pesquisar</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_qrcode_label">Código QR</string>
@@ -187,5 +188,19 @@
     <!-- -/-/-/-/-/-/-/- LIBRARY -/-/-/-/-/-/-/- -->
     <!-- -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- -->
     <string name="library_title">Biblioteca</string>
+
+    <string name="library_no_authors">(Sem autor)</string>
+
+    <string name="library_borrow_title">Seus empréstimos</string>
+    <string name="library_borrow_renew_all">Renovar tudo</string>
+    <string name="library_borrow_empty">Nenhum empréstimo :(</string>
+
+    <string name="library_reservation_title">Suas reservas</string>
+    <string name="library_reservation_empty">Nenhuma reserva :(</string>
+
+    <string name="library_history_title">Seu histórico</string>
+    <string name="library_history_view_all">Visualizar</string>
+    <string name="library_history_empty">Histórico vazio :(</string>
+
 
 </resources>

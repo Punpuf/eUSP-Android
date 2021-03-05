@@ -36,7 +36,7 @@ class DailyMenuFragment : Fragment() {
 
             //d("dinner ${dailyMenu.dinnerMenu}")
             if (dailyMenu.dinnerMenu.isNotBlank()) {
-                d("dinner not blank")
+                //d("dinner not blank")
                 dailyMenuDinnerContentTv.text = dailyMenu.dinnerMenu
                 if (dailyMenu.dinnerCalories.isNotBlank() && dailyMenu.dinnerCalories != "0") {
                     dailyMenuDinnerTitleTv.text = getString(R.string.bandejao_dinner_calories, dailyMenu.dinnerCalories)

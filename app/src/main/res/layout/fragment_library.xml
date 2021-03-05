@@ -12,15 +12,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/libraryConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.button.MaterialButton
             style="@style/AppCardToolbarIconBtnStyle"
             android:id="@+id/libraryToolbarSettingsBtn"
             android:layout_marginEnd="@dimen/card_external_margin_horizontal"
             android:contentDescription="@string/toolbar_settings_btn_description"
-            android:visibility="visible"
-            android:transitionName="trans_dest_settings_main"
+            android:transitionName="@string/transition_to_settings_main"
             app:icon="@drawable/ic_settings"
             app:layout_constraintTop_toTopOf="@+id/libraryTitleTv"
             app:layout_constraintBottom_toBottomOf="@+id/libraryTitleTv"
@@ -32,7 +32,6 @@
             android:layout_marginEnd="@dimen/padding_normal"
             android:contentDescription="@string/toolbar_refresh_btn_description"
             android:visibility="visible"
-            android:enabled="false"
             app:icon="@drawable/ic_search_black"
             app:layout_constraintTop_toTopOf="@+id/libraryTitleTv"
             app:layout_constraintBottom_toBottomOf="@+id/libraryTitleTv"
@@ -48,6 +47,246 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/libraryToolbarSearchBtn"/>
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/libraryToolbarBarrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="libraryTitleTv, libraryToolbarSearchBtn, libraryToolbarSettingsBtn"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/libraryBorrowLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:layout_constraintTop_toBottomOf="@id/libraryToolbarBarrier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/libraryBorrowProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:indeterminateOnly="true"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/AppCardTextTitleStyle"
+                android:id="@+id/libraryBorrowTitleTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_normal"
+                android:paddingHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/library_borrow_title"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                style="@style/Widget.App.Button.Contained"
+                android:id="@+id/libraryBorrowRenewAllBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/padding_normal"
+                android:paddingHorizontal="@dimen/spacing_huge"
+                android:text="@string/library_borrow_renew_all"
+                app:layout_constraintTop_toBottomOf="@id/libraryBorrowTitleTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/libraryBorrowList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/libraryBorrowRenewAllBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/list_item_book_user"
+                tools:itemCount="3"
+                tools:visibility="visible"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body2"
+                android:id="@+id/libraryBorrowEmptyTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/library_borrow_empty"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="@dimen/card_internal_margin_horizontal"
+                android:paddingVertical="@dimen/padding_normal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/libraryBorrowList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/libraryReservationLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/libraryBorrowLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/libraryReservationProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:indeterminateOnly="true"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/AppCardTextTitleStyle"
+                android:id="@+id/libraryReservationTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_normal"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:text="@string/library_reservation_title"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/libraryReservationList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/libraryReservationTitleTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/list_item_book_user"
+                tools:itemCount="3"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body2"
+                android:id="@+id/libraryReservationEmptyTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/library_reservation_empty"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="@dimen/card_internal_margin_horizontal"
+                android:paddingVertical="@dimen/padding_normal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/libraryReservationList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- HISTORY -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppNormalCardStyle"
+            android:id="@+id/libraryHistoryLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/libraryReservationLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/libraryHistoryProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:indeterminateOnly="true"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/AppCardTextTitleStyle"
+                android:id="@+id/libraryHistoryTitleTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_internal_margin_horizontal"
+                android:paddingTop="@dimen/padding_normal"
+                android:text="@string/library_history_title"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!--<Button
+                style="@style/Widget.App.Button.TextButton"
+                android:id="@+id/libraryHistoryViewBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/padding_normal"
+                android:text="@string/library_history_view_all"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>-->
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/libraryHistoryBarrier"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="libraryHistoryTitleTv"
+                app:barrierDirection="bottom"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/libraryHistoryList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/libraryHistoryBarrier"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/list_item_book_user"
+                tools:itemCount="3"/>
+
+            <TextView
+                style="@style/App.TextAppearance.Body2"
+                android:id="@+id/libraryHistoryEmptyTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/library_reservation_empty"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="@dimen/card_internal_margin_horizontal"
+                android:paddingVertical="@dimen/padding_normal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/libraryHistoryList"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/libraryLoginCardLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            layout="@layout/layout_card_login"
+            android:layout_marginHorizontal="@dimen/card_external_margin_vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/libraryHistoryLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/padding_normal"
+            app:layout_constraintTop_toBottomOf="@id/libraryLoginCardLayout"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

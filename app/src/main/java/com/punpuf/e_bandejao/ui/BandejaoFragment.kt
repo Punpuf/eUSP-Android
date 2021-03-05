@@ -117,7 +117,7 @@ class BandejaoFragment : Fragment() {
         var data: MutableList<DailyMenu> = mutableListOf()
 
         fun updateData(newRestaurantId: Int, newData: MutableList<DailyMenu>) {
-            d("New Daily menu data of $restaurantId incoming $newData")
+            //d("New Daily menu data of $restaurantId incoming $newData")
             restaurantId = newRestaurantId
             data.clear()
             data.addAll(newData)
@@ -133,7 +133,7 @@ class BandejaoFragment : Fragment() {
         }
 
         override fun getItemId(position: Int): Long {
-            d("returning an id for this item of ${"$restaurantId${data[position].dateProcessedStart}".toLong()}")
+            //d("returning an id for this item of ${"$restaurantId${data[position].dateProcessedStart}".toLong()}")
             return "$restaurantId${data[position].dateProcessedStart}".toLong()
         }
 

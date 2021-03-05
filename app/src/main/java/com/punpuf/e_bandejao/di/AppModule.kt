@@ -4,14 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.punpuf.e_bandejao.Const
 import com.punpuf.e_bandejao.background.UpdateTokenWorkerHelper
-import com.punpuf.e_bandejao.network.LiveDataCallAdapterFactory
-import com.punpuf.e_bandejao.network.UspApi
-import com.punpuf.e_bandejao.network.UspNetworkService
 import com.github.scribejava.core.builder.ServiceBuilder
 import com.github.scribejava.core.oauth.OAuth10aService
 import com.punpuf.e_bandejao.BuildConfig
 import com.punpuf.e_bandejao.db.*
-import com.punpuf.e_bandejao.network.CustomNetworkService
+import com.punpuf.e_bandejao.network.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,66 +34,50 @@ object AppModule {
     fun provideIoDispatcher() = Dispatchers.IO
 
 
-    //DATABASE
+    // ******************************************************
+    // ********************** DATABASE **********************
+    // ******************************************************
 
-    @Singleton
-    @Provides
-    fun provideDatabase(@ApplicationContext context: Context): CardDatabase {
+    @Singleton @Provides
+    fun provideDatabase(@ApplicationContext context: Context): Database {
         return Room.databaseBuilder(
             context,
-            CardDatabase::class.java,
+            Database::class.java,
             Const.DB_CARD_NAME
         ).build()
     }
 
-    @Singleton
-    @Provides
-    fun provideProfilePictureDao(cardDatabase: CardDatabase): ProfilePictureInfoDao {
-        return cardDatabase.profilePictureInfoDao()
-    }
+    @Singleton @Provides
+    fun provideProfilePictureDao(database: Database): ProfilePictureInfoDao = database.profilePictureInfoDao()
 
-    @Singleton
-    @Provides
-    fun provideTokenDao(cardDatabase: CardDatabase): TokenDao {
-        return cardDatabase.tokenDao()
-    }
+    @Singleton @Provides
+    fun provideTokenDao(database: Database): TokenDao = database.tokenDao()
 
-    @Singleton
-    @Provides
-    fun provideUserInfoDao(cardDatabase: CardDatabase): UserInfoDao {
-        return cardDatabase.userInfoDao()
-    }
+    @Singleton @Provides
+    fun provideUserInfoDao(database: Database): UserInfoDao = database.userInfoDao()
+
+    @Singleton @Provides
+    fun provideProfileDao(database: Database): UserProfileDao = database.userProfileDao()
+
+    @Singleton @Provides
+    fun provideRestaurantDao(database: Database): RestaurantDao = database.restaurantDao()
+
+    @Singleton @Provides
+    fun provideMenuDao(database: Database): MenuDao = database.menuDao()
+
+    @Singleton @Provides
+    fun provideSelectedRestaurantDao(database: Database): SelectedRestaurantDao = database.selectedRestaurantDao()
+
+    @Singleton @Provides
+    fun provideBoletoDao(database: Database): BoletoDao = database.boletoDao()
+
+    @Singleton @Provides
+    fun provideBookUser(database: Database): BookUserDao = database.bookUserDao()
 
 
-    @Singleton
-    @Provides
-    fun provideProfileDao(cardDatabase: CardDatabase): UserProfileDao {
-        return cardDatabase.userProfileDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRestaurantDao(cardDatabase: CardDatabase): RestaurantDao {
-        return cardDatabase.restaurantDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideMenuDao(cardDatabase: CardDatabase): MenuDao {
-        return cardDatabase.menuDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideSelectedRestaurantDao(cardDatabase: CardDatabase): SelectedRestaurantDao {
-        return cardDatabase.selectedRestaurantDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideBoletoDao(cardDatabase: CardDatabase): BoletoDao {
-        return cardDatabase.boletoDao()
-    }
+    // ******************************************************
+    // ********************** FILE I/O **********************
+    // ******************************************************
 
     @Provides
     fun provideFileOutputStream(@ApplicationContext context: Context): FileOutputStream {
@@ -114,8 +95,9 @@ object AppModule {
     }
 
 
-    //NETWORK
-
+    // ******************************************************
+    // *********************** NETWORK **********************
+    // ******************************************************
     @Singleton
     @Provides
     fun provideRetrofitClient(): OkHttpClient {
@@ -151,6 +133,12 @@ object AppModule {
     @Provides
     fun provideCustomNetworkService(retrofit: Retrofit): CustomNetworkService {
         return retrofit.create(CustomNetworkService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLibraryNetworkService(retrofit: Retrofit): LibraryNetworkService {
+        return retrofit.create(LibraryNetworkService::class.java)
     }
 
 

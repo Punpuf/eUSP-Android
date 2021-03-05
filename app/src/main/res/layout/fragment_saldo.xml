@@ -41,7 +41,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/AppCardToolbarIconBtnStyle"
-                android:id="@+id/libraryToolbarSearchBtn"
+                android:id="@+id/saldoToolbarRefreshBtn"
                 android:layout_marginEnd="@dimen/padding_normal"
                 android:contentDescription="@string/toolbar_refresh_btn_description"
                 android:visibility="visible"
@@ -50,7 +50,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/AppCardToolbarIconBtnStyle"
-                android:id="@+id/libraryToolbarSettingsBtn"
+                android:id="@+id/saldoToolbarSettingsBtn"
                 android:layout_marginEnd="@dimen/card_external_margin_horizontal"
                 android:contentDescription="@string/toolbar_settings_btn_description"
                 android:visibility="visible"
@@ -59,14 +59,13 @@
 
         </LinearLayout>
 
-
-
         <LinearLayout
             style="@style/AppNormalCardStyle"
             android:id="@+id/saldoDepositLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:layout_marginBottom="@dimen/padding_normal"
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible">
@@ -129,6 +128,7 @@
             android:id="@+id/saldoBoletoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:paddingBottom="@dimen/spacing_normal"
             android:visibility="gone"
             tools:visibility="visible">

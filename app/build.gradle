@@ -25,6 +25,21 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    
+    buildFeatures {
+        compose true
+
+        // Disable unused AGP features
+        buildConfig false
+        aidl false
+        renderScript false
+        resValues false
+        shaders false
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+    }
 
     buildTypes {
         release {
@@ -43,75 +58,112 @@ android {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    def hilt_version = "2.28-alpha"
-    def hilt_jetpack_version = "1.0.0-alpha02"
-    def timber_version = "4.7.1"
-    def nav_version = "2.3.2"
-    def fragment_version = "1.2.5"
-    def scribe_version = "6.4.1"
-    def coroutines_android_version = "1.3.8"
-    def activity_version = "1.1.0"
-    def webview_version = "1.4.0"
-    def retrofit_version = "2.6.0"
-    def retrofit_logger_version = "4.2.1"
-    def room_version = "2.2.6"
-    def google_zxing_version = "3.2.0"
-    def journey_zxing_version = "3.0.2@aar"
-    def work_version = "2.4.0"
-
-    def glide_version = "4.11.0"
-
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation "androidx.preference:preference:1.1.1"
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation "androidx.preference:preference-ktx:1.1.1"
+    
+    
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+
+    def kotlinReflectVersion = "1.4.31"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinReflectVersion"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    
+    
+    //DI
+    def hilt_version = "2.28-alpha"
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
-    implementation "androidx.hilt:hilt-work:$hilt_jetpack_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    def hilt_jetpack_version = "1.0.0-alpha03"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    implementation "androidx.hilt:hilt-work:$hilt_jetpack_version"    
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
 
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
+    
+    // Utils
+    def timber_version = "4.7.1"
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
-
-    implementation "com.github.scribejava:scribejava-apis:$scribe_version"
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
-
-    implementation "androidx.activity:activity-ktx:$activity_version"
-
-    implementation "androidx.webkit:webkit:$webview_version"
-
+    def google_zxing_version = "3.2.0"
+    def journey_zxing_version = "3.0.2@aar"
+    implementation "com.google.zxing:core:$google_zxing_version"
+    implementation "com.journeyapps:zxing-android-embedded:$journey_zxing_version"
+    
+    
+    // Networking
+    def retrofit_version = "2.6.0"
+    def retrofit_logger_version = "4.2.1"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logger_version"
 
+    def glide_version = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    
+    def scribe_version = "6.4.1"
+    implementation "com.github.scribejava:scribejava-apis:$scribe_version"
+
+    def webview_version = "1.4.0"
+    implementation "androidx.webkit:webkit:$webview_version"
+    
+    
+    // AndroidX
+    def androidXVersion = "1.5.0-beta02"
+    implementation "androidx.core:core-ktx:$androidXVersion"
+    
+    def fragment_version = "1.3.0"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    def activity_version = "1.2.0"
+    implementation "androidx.activity:activity-ktx:$activity_version"
+    
+    
+    // Background-ish
+    def coroutines_android_version = "1.4.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
+
+    def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    implementation "com.journeyapps:zxing-android-embedded:$journey_zxing_version"
-    implementation "com.google.zxing:core:$google_zxing_version"
-
+    def work_version = "2.5.0"
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    
+    
+    // Compose
+    def accompanistVersion = "0.6.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:$accompanistVersion"
+    implementation "dev.chrisbanes.accompanist:accompanist-insets:$accompanistVersion"
 
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "androidx.compose.foundation:foundation:$composeVersion"
+    implementation "androidx.compose.foundation:foundation-layout:$composeVersion"
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.ui:ui-util:$composeVersion"
+    implementation "androidx.compose.runtime:runtime:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.animation:animation:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    implementation "androidx.compose.material:material-icons-extended:$composeVersion"
+    implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
 
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    def activityVersion = "1.3.0-alpha03"
+    implementation "androidx.activity:activity-compose:$activityVersion"
+
+    def lifecycleVersion = "1.0.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
+
+    def constraintLayoutVersion = "1.0.0-alpha03"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$constraintLayoutVersion"
 
 }
