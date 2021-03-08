@@ -191,16 +191,32 @@
 
     <string name="library_no_authors">(Sem autor)</string>
 
-    <string name="library_borrow_title">Seus empréstimos</string>
-    <string name="library_borrow_renew_all">Renovar tudo</string>
-    <string name="library_borrow_empty">Nenhum empréstimo :(</string>
+    <string name="library_loan_title">Seus empréstimos</string>
+    <string name="library_loan_renew_all">Renovar tudo</string>
+    <string name="library_loan_empty">Nenhum empréstimo :(</string>
+    <string name="library_loan_renew">Renovar Empréstimos</string>
+    <string name="library_loan_due_date">Vence em %1s</string>
 
     <string name="library_reservation_title">Suas reservas</string>
     <string name="library_reservation_empty">Nenhuma reserva :(</string>
+    <string name="library_reservation_cancel">Cancelar Reserva</string>
+    <string name="library_reservation_hold_seq">%1sº na fila</string>
 
     <string name="library_history_title">Seu histórico</string>
     <string name="library_history_view_all">Visualizar</string>
     <string name="library_history_empty">Histórico vazio :(</string>
+    <string name="library_history_return_date">Devolvido em %1s</string>
+
+    <!-- Search -->
+    <string name="search_app">Pesquisar no SIBI USP</string>
+    <string name="search_no_matches">No matches for “%1s”</string>
+    <string name="search_no_matches_retry">Try broadening your search</string>
+    <string name="search_count">%1d items</string>
+    <string name="label_add">Add to cart</string>
+    <string name="label_search">Perform search</string>
+    <string name="label_back">Retornar</string>
+    <string name="label_clear">Limpar</string>
+    <string name="search_suggestions_recent">Pesquisas recentes</string>
 
 
 </resources>

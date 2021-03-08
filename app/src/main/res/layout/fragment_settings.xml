@@ -100,7 +100,7 @@
             android:id="@+id/settingsPrefs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:name="com.punpuf.e_bandejao.ui.PrefsFragment"
+            android:name="com.punpuf.e_usp.ui.PrefsFragment"
             app:layout_constraintTop_toBottomOf="@id/settingsAccountDescriptionTv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

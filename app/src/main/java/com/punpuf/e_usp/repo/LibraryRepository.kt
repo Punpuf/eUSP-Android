@@ -31,7 +31,7 @@ class LibraryRepository @Inject constructor(
 
             override suspend fun shouldFetch(data: List<BookUser>?): Boolean {
                 // todo add check
-                return true
+                return false
             }
 
             override suspend fun createCall(): LiveData<ApiResponse<NetworkResponseBookUser>> {
@@ -58,7 +58,7 @@ class LibraryRepository @Inject constructor(
 
             override suspend fun shouldFetch(data: List<BookUser>?): Boolean {
                 // todo add check
-                return true
+                return false
             }
 
             override suspend fun createCall(): LiveData<ApiResponse<NetworkResponseBookUser>> {
@@ -83,7 +83,7 @@ class LibraryRepository @Inject constructor(
                 return bookUserDao.getBookUsersByType(BookUserType.HISTORY)
             }
 
-            override suspend fun shouldFetch(data: List<BookUser>?): Boolean = true
+            override suspend fun shouldFetch(data: List<BookUser>?): Boolean = false
 
             override suspend fun createCall(): LiveData<ApiResponse<NetworkResponseBookUser>> {
                 val wsUserIdToken: Token? = tokenDao.getTokenById(Const.TABLE_TOKEN_VALUE_ID_WS_USER_ID)

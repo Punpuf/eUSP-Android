@@ -78,4 +78,11 @@ class LibraryViewModel @ViewModelInject constructor(
             libraryHistoryData
         }
     }
+    
+    
+    
+    
+    fun getSearchSuggestions(): List<String> {
+        return emptyList()
+    }
 }

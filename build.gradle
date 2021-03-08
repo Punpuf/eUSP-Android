@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = "1.4.31"
+        kotlinVersion = "1.4.30"
         composeVersion = "1.0.0-beta01"
         hiltVersion = "2.28-alpha"
         navVersion = "2.3.3"
@@ -8,6 +8,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.0-alpha08"
@@ -22,6 +23,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 }
 

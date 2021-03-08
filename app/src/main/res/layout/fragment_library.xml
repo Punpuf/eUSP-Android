@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.compose.ui.platform.ComposeView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/libraryComposeView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+<!--
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -192,7 +200,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- HISTORY -->
+        &lt;!&ndash; HISTORY &ndash;&gt;
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/AppNormalCardStyle"
             android:id="@+id/libraryHistoryLayout"
@@ -227,7 +235,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!--<Button
+            &lt;!&ndash;<Button
                 style="@style/Widget.App.Button.TextButton"
                 android:id="@+id/libraryHistoryViewBtn"
                 android:layout_width="wrap_content"
@@ -235,7 +243,7 @@
                 android:paddingHorizontal="@dimen/padding_normal"
                 android:text="@string/library_history_view_all"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>-->
+                app:layout_constraintEnd_toEndOf="parent"/>&ndash;&gt;
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/libraryHistoryBarrier"
@@ -290,4 +298,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>-->

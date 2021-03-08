@@ -1,5 +1,7 @@
 package com.punpuf.e_usp.vo
 
+import android.os.Parcelable
+import androidx.compose.runtime.Stable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import com.google.gson.annotations.Expose
@@ -20,12 +22,15 @@ import com.punpuf.e_usp.Const.Companion.TABLE_BOOK_USER_SYS_NO
 import com.punpuf.e_usp.Const.Companion.TABLE_BOOK_USER_TITLE
 import com.punpuf.e_usp.Const.Companion.TABLE_BOOK_USER_TYPE
 import com.punpuf.e_usp.util.StringListTypeAdapter
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = Const.TABLE_BOOK_USER,
     primaryKeys = [TABLE_BOOK_USER_SYS_NO, TABLE_BOOK_USER_ITEM_SEQ, TABLE_BOOK_USER_HOLD_SEQ,
         TABLE_BOOK_USER_CALL_NO, TABLE_BOOK_USER_DUE_DATE, TABLE_BOOK_USER_RETURN_DATE]
 )
+@Stable
+@Parcelize
 data class BookUser(
 
     @ColumnInfo(name = TABLE_BOOK_USER_TYPE)
@@ -83,4 +88,6 @@ data class BookUser(
     @ColumnInfo(name = TABLE_BOOK_USER_NO_RENEW)
     val noRenew: String = "",
 
-)
+) : Parcelable
+
+const val RENEW_ALLOWED = "0"
