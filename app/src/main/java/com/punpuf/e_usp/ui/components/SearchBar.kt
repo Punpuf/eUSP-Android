@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.punpuf.e_usp.R
-import com.punpuf.e_usp.ui.LibraryFragment.SearchDisplay
+import com.punpuf.e_usp.ui.library.LibraryFragment.SearchDisplay
 import com.punpuf.e_usp.ui.theme.AppTheme
 import com.punpuf.e_usp.ui.theme.Typography
 

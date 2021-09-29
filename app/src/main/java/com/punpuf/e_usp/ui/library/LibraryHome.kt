@@ -1,6 +1,5 @@
 package com.punpuf.e_usp.ui.library
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -25,7 +24,6 @@ import com.punpuf.e_usp.ui.theme.AppTheme
 import com.punpuf.e_usp.ui.theme.Shapes
 import com.punpuf.e_usp.ui.theme.Typography
 import com.punpuf.e_usp.vo.BookUser
-import com.punpuf.e_usp.vo.BookUserType
 import com.punpuf.e_usp.vo.Resource
 import dev.chrisbanes.accompanist.insets.statusBarsHeight
 import kotlinx.coroutines.CoroutineScope
@@ -36,15 +34,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import com.punpuf.e_usp.ui.components.*
+import com.punpuf.e_usp.vo.BookOfUserType
 import com.punpuf.e_usp.vo.RENEW_ALLOWED
 
 @ExperimentalMaterialApi
 @Composable
 fun LibraryHome(
     modifier: Modifier = Modifier,
-    loanList: Resource<List<BookUser>>,
-    reservationList: Resource<List<BookUser>>,
-    historyList: Resource<List<BookUser>>,
+    loanList: Resource<List<BookUser>>?,
+    reservationList: Resource<List<BookUser>>?,
+    historyList: Resource<List<BookUser>>?,
 ) {
     
     var selectedBookOfUser by rememberSaveable { mutableStateOf(BookUser()) }
@@ -68,9 +67,9 @@ fun LibraryHome(
 @Composable
 fun LibraryHome(
     modifier: Modifier = Modifier,
-    loanList: Resource<List<BookUser>>,
-    reservationList: Resource<List<BookUser>>,
-    historyList: Resource<List<BookUser>>,
+    loanList: Resource<List<BookUser>>?,
+    reservationList: Resource<List<BookUser>>?,
+    historyList: Resource<List<BookUser>>?,
     selectedBookOfUser: BookUser,
     onBookOfUserClicked: (BookUser) -> Unit,
     bottomSheetScaffoldState: BottomSheetScaffoldState,
@@ -90,7 +89,8 @@ fun LibraryHome(
 
             Spacer(modifier = Modifier.statusBarsHeight(56.dp))
 
-            if (loanList.status == Resource.Status.SUCCESS && loanList.data != null) {
+            d("loan info ${loanList?.status} + ${loanList?.data}")
+            if (loanList?.status == Resource.Status.SUCCESS && loanList.data != null) {
                 BookOfUserGroup(
                     title = stringResource(R.string.library_loan_title),
                     bookOfUserList = loanList.data,
@@ -103,7 +103,7 @@ fun LibraryHome(
                 )
             }
 
-            if (reservationList.status == Resource.Status.SUCCESS && reservationList.data != null) {
+            if (reservationList?.status == Resource.Status.SUCCESS && reservationList.data != null) {
                 BookOfUserGroup(
                     title = stringResource(R.string.library_reservation_title),
                     bookOfUserList = reservationList.data,
@@ -115,7 +115,7 @@ fun LibraryHome(
                 )
             }
 
-            if (historyList.status == Resource.Status.SUCCESS && historyList.data != null) {
+            if (historyList?.status == Resource.Status.SUCCESS && historyList.data != null) {
                 BookOfUserGroup(
                     title = stringResource(R.string.library_history_title),
                     bookOfUserList = historyList.data,
@@ -191,7 +191,7 @@ fun BookOfUserSheet(
         
         
         when (bookOfUser.type) {
-            BookUserType.LOAN -> {
+            BookOfUserType.LOAN -> {
                 SecondaryText(stringResource(R.string.library_loan_due_date, bookOfUser.dueDate))
                 if (bookOfUser.noRenew == RENEW_ALLOWED) {
                     AppRoundedButton(
@@ -201,7 +201,7 @@ fun BookOfUserSheet(
                     )
                 }
             }
-            BookUserType.RESERVATION -> {
+            BookOfUserType.RESERVATION -> {
                 SecondaryText(stringResource(R.string.library_reservation_hold_seq, bookOfUser.holdSeq))
                 AppRoundedButton(
                     onClick = { /*TODO*/ }, 
@@ -210,7 +210,7 @@ fun BookOfUserSheet(
                 )
             }
             
-            BookUserType.HISTORY -> {
+            BookOfUserType.HISTORY -> {
                 SecondaryText(stringResource(R.string.library_history_return_date, bookOfUser.returnDate))
                 SecondaryText(bookOfUser.callNo)
             }

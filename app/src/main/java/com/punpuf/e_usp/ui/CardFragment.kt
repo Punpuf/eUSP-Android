@@ -154,7 +154,6 @@ class CardFragment : Fragment() {
                 cardQrcodeLayout,
             )
             cardEcardUserNameTv.text = ""
-            cardEcardUserDepartmentTv.text = ""
             cardQrcodeStatusTv.text = ""
 
             return
@@ -216,6 +215,7 @@ class CardFragment : Fragment() {
 
         cardEcardUserGroupTv.text = currentProfile?.userGroup ?: ""
         cardEcardUserTypeTv.text = currentProfile?.userType ?: ""
+        cardEcardUserDepartmentTv.text = currentProfile?.userDepartment ?: ""
         cardEcardUserExpirationDateTv.text =
             if(!currentProfile?.cardExpirationDate.isNullOrEmpty()) {
                 getString(R.string.card_ecard_expiration_date, currentProfile?.cardExpirationDate?.replace("-", "/"))

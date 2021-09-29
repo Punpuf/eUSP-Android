@@ -218,5 +218,10 @@
     <string name="label_clear">Limpar</string>
     <string name="search_suggestions_recent">Pesquisas recentes</string>
 
+    <string name="filter_label">Filtro</string>
+    <string name="filter_location">Local</string>
+    <string name="filter_search_type">Buscar por</string>
+    <string name="filter_material_type">Tipo de material</string>
+    <string name="search_no_author">Autoria não informada</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.punpuf.e_usp.di
 
 import android.content.Context
+import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import com.punpuf.e_usp.Const
 import com.punpuf.e_usp.background.UpdateTokenWorkerHelper
@@ -9,6 +10,7 @@ import com.github.scribejava.core.oauth.OAuth10aService
 import com.punpuf.e_usp.BuildConfig
 import com.punpuf.e_usp.db.*
 import com.punpuf.e_usp.network.*
+import com.punpuf.e_usp.repo.LibraryRemoteMediator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -72,7 +74,10 @@ object AppModule {
     fun provideBoletoDao(database: Database): BoletoDao = database.boletoDao()
 
     @Singleton @Provides
-    fun provideBookUser(database: Database): BookUserDao = database.bookUserDao()
+    fun provideBookUser(database: Database): BookOfUserDao = database.bookUserDao()
+    
+    @Singleton @Provides
+    fun provideBookOfSearch(database: Database): BookOfSearchDao = database.bookOfSearchDao()
 
 
     // ******************************************************
@@ -159,6 +164,18 @@ object AppModule {
     @Provides
     fun provideUpdateTokenWorkerHelper(@ApplicationContext context: Context): UpdateTokenWorkerHelper {
         return UpdateTokenWorkerHelper(context)
+    }
+    
+    //
+
+    @ExperimentalPagingApi
+    @Singleton
+    @Provides
+    fun provideLibraryRemoteMediator(
+        dao: BookOfSearchDao,
+        networkService: LibraryNetworkService,
+    ): LibraryRemoteMediator {
+        return LibraryRemoteMediator(dao, networkService)
     }
 }
 

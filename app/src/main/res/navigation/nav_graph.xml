@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/libraryFragment">
+    app:startDestination="@id/bandejaoFragment">
 
     <fragment
         android:id="@+id/cardFragment"
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.punpuf.e_usp.ui.LibraryFragment"
+        android:name="com.punpuf.e_usp.ui.library.LibraryFragment"
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_loginFragment"

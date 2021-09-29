@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.punpuf.e_usp.R
 import com.punpuf.e_usp.util.BookUserClickInterface
 import com.punpuf.e_usp.util.Utils
+import com.punpuf.e_usp.vo.BookOfUserType
 import com.punpuf.e_usp.vo.BookUser
-import com.punpuf.e_usp.vo.BookUserType
 import kotlinx.android.synthetic.main.list_item_book_user.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,17 +40,17 @@ class BookUserRecyclerAdapter(
         holder.layout.setOnClickListener { clickInterface.notifyBookUserClicked(bookUser) }
 
         when (bookUser.type) {
-            BookUserType.LOAN -> {
+            BookOfUserType.LOAN -> {
                 if (bookUser.dueDate.isNotBlank() == true) {
                     val processedDate = try { getProcessedDate(bookUser.dueDate) } catch (e: Exception) { "" }
                     if (processedDate == "") Utils.makeViewsGone(holder.dateTv)
                     else holder.dateTv.text = processedDate
                 }
             }
-            BookUserType.RESERVATION -> {
+            BookOfUserType.RESERVATION -> {
                 Utils.makeViewsGone(holder.dateTv)
             }
-            BookUserType.HISTORY -> {
+            BookOfUserType.HISTORY -> {
                 if (bookUser.returnDate.isNotBlank() == true) {
                     val processedDate = try { getProcessedDate(bookUser.returnDate) } catch (e: Exception) { "" }
                     if (processedDate == "") Utils.makeViewsGone(holder.dateTv)

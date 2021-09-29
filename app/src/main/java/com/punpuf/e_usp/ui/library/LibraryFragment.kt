@@ -1,4 +1,4 @@
-package com.punpuf.e_usp.ui
+package com.punpuf.e_usp.ui.library
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,32 +11,35 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Category
+import androidx.compose.material.icons.rounded.ManageSearch
+import androidx.compose.material.icons.rounded.Place
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.zIndex
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.ExperimentalPagingApi
 import com.punpuf.e_usp.R
 import com.punpuf.e_usp.model.LibraryViewModel
 import com.punpuf.e_usp.ui.components.*
-import com.punpuf.e_usp.ui.library.LibraryHome
-import com.punpuf.e_usp.ui.library.NoResults
-import com.punpuf.e_usp.ui.library.SearchResults
-import com.punpuf.e_usp.ui.library.SearchSuggestions
 import com.punpuf.e_usp.ui.theme.AlphaNearOpaque
 import com.punpuf.e_usp.ui.theme.AppTheme
 import com.punpuf.e_usp.vo.Filter
-import com.punpuf.e_usp.vo.Publication
+import com.punpuf.e_usp.vo.FilterTypes
+import com.punpuf.e_usp.vo.BookOfSearch
 import com.punpuf.e_usp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 import kotlinx.android.synthetic.main.fragment_library.view.*
 
-@ExperimentalAnimationApi
+@OptIn(ExperimentalPagingApi::class, ExperimentalAnimationApi:: class)
 @AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
@@ -60,13 +63,13 @@ class LibraryFragment : Fragment() {
             }
         }
     }
-
+    
     @ExperimentalMaterialApi
     @Composable
     fun SearchScreen(
         modifier: Modifier = Modifier,
         state: SearchState = rememberSearchState(),
-        onPublicationClick: (Publication) -> Unit,
+        onPublicationClick: (BookOfSearch) -> Unit,
     ) {
         Box(modifier = modifier) {
             // Search Bar
@@ -77,12 +80,15 @@ class LibraryFragment : Fragment() {
                 SearchBar(
                     display = state.searchDisplay,
                     query = state.query,
-                    onSearch = { state.searchDisplay = SearchDisplay.SearchResults },
+                    onSearch = {
+                        model.setSearchQuery(state.query.text)
+                        state.searchDisplay = SearchDisplay.SearchResults
+                               },
                     onQueryChange = { state.query = it },
                     onFocus = { state.searchDisplay = SearchDisplay.Suggestions },
                     onGoBack = {
-                        state.searchDisplay = SearchDisplay.Home
                         state.query = TextFieldValue("")
+                        state.searchDisplay = SearchDisplay.Home
                     },
                     onClearQuery = { state.query = TextFieldValue("") },
                     searching = state.searching
@@ -109,10 +115,10 @@ class LibraryFragment : Fragment() {
                     onSuggestionSelect = { suggestion -> state.query = TextFieldValue(suggestion) },
                 )
                 SearchDisplay.SearchResults -> SearchResults(
-                    state.query.text,
-                    state.searchResults,
-                    state.filters,
-                    onPublicationClick
+                    emptyList(),
+                    {},
+                    model,
+                    modifier = Modifier.zIndex(-1f)
                 )
             }
 
@@ -131,11 +137,10 @@ class LibraryFragment : Fragment() {
         query: TextFieldValue = TextFieldValue(""),
         searching: Boolean = false,
         suggestions: List<String> = model.getSearchSuggestions(),
-        filters: List<Filter> = emptyList(),
-        searchResults: List<Publication> = emptyList(),
+        filters: List<Filter> = getSearchFilters(),
+        searchResults: List<BookOfSearch> = emptyList(),
         searchDisplay: SearchDisplay = SearchDisplay.Home,
-
-        ): SearchState {
+    ): SearchState {
         return remember {
             SearchState(
                 query = query,
@@ -154,7 +159,7 @@ class LibraryFragment : Fragment() {
         searching: Boolean,
         suggestions: List<String> = emptyList(),
         filters: List<Filter>,
-        searchResults: List<Publication>,
+        searchResults: List<BookOfSearch>,
         searchDisplay: SearchDisplay,
         focusRequester: FocusRequester = FocusRequester(),
     ) {
@@ -165,6 +170,27 @@ class LibraryFragment : Fragment() {
         var searchResults by mutableStateOf(searchResults)
         var searchDisplay by mutableStateOf(searchDisplay)
         val focusRequester by mutableStateOf(focusRequester)
+    }
+    
+    @Composable
+    fun getSearchFilters(): List<Filter> {
+        return listOf(
+            Filter(
+                type = FilterTypes.Location,
+                name = stringResource(R.string.filter_location),
+                icon = Icons.Rounded.Place,
+            ),
+            Filter(
+                type = FilterTypes.MaterialType,
+                name = stringResource(R.string.filter_material_type),
+                icon = Icons.Rounded.Category,
+            ),
+            Filter(
+                type = FilterTypes.SearchType,
+                name = stringResource(R.string.filter_search_type),
+                icon = Icons.Rounded.ManageSearch,
+            ),
+        )
     }
     
 }

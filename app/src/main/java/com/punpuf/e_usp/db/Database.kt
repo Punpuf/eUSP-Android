@@ -7,8 +7,11 @@ import com.punpuf.e_usp.Const.Companion.DB_CARD_VERSION
 import com.punpuf.e_usp.vo.*
 
 @Database(
-    entities = [Token::class, UserProfile::class, UserInfo ::class, ProfilePictureInfo::class,
-    Restaurant::class, WeeklyMenu::class, SelectedRestaurant::class, Boleto::class, BookUser::class],
+    entities = [
+        Token::class, UserProfile::class, UserInfo ::class, ProfilePictureInfo::class,
+        Restaurant::class, WeeklyMenu::class, SelectedRestaurant::class, Boleto::class, BookUser::class,
+        BookOfSearch::class,
+    ],
     version = DB_CARD_VERSION,
     exportSchema = false
 )
@@ -22,5 +25,6 @@ abstract class Database : RoomDatabase() {
     abstract fun menuDao(): MenuDao
     abstract fun selectedRestaurantDao(): SelectedRestaurantDao
     abstract fun boletoDao(): BoletoDao
-    abstract fun bookUserDao(): BookUserDao
+    abstract fun bookUserDao(): BookOfUserDao
+    abstract fun bookOfSearchDao(): BookOfSearchDao
 }

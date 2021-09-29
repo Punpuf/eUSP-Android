@@ -25,7 +25,7 @@ class CardViewModel @ViewModelInject constructor(
         else {
             viewModelScope.launch {
                 userProfileListData.addSource(cardRepository.getUserProfiles()) {
-                    d("userProfileListData - update getUserProfiles")
+                    d("userProfileListData - update getUserProfiles: ${it?.data}")
                     userProfileListData.postValue(it)
                 }
             }

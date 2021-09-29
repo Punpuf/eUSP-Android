@@ -3,6 +3,8 @@ package com.punpuf.e_usp.network
 import androidx.lifecycle.LiveData
 import com.punpuf.e_usp.Const.Companion.NETWORK_BASE_LIBRARY
 import com.punpuf.e_usp.Const.Companion.NETWORK_ENDPOINT_LIBRARY_MAIN
+import com.punpuf.e_usp.Const.Companion.NETWORK_ENDPOINT_LIBRARY_SEARCH
+import com.punpuf.e_usp.vo_network.NetworkResponseBookOfSearch
 import com.punpuf.e_usp.vo_network.NetworkResponseBookUser
 import retrofit2.http.*
 
@@ -63,4 +65,17 @@ interface LibraryNetworkService {
         @Field("loginVersion") loginVersion: String = "1",
     ): LiveData<ApiResponse<NetworkResponseBookUser>>
 
+
+    
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @FormUrlEncoded
+    @POST("{url}")
+    suspend fun requestLibraryBookOfSearchList(
+        @Path(value = "url", encoded = true) url: String = NETWORK_BASE_LIBRARY + NETWORK_ENDPOINT_LIBRARY_SEARCH,
+        @Field("page") page: Int,
+        @Field("search") query : String,
+        //@Field("resourceType") materialType: String,
+        //@Field("options") searchBy: String,
+        //@Field("library") library: String,
+    ): NetworkResponseBookOfSearch
 }

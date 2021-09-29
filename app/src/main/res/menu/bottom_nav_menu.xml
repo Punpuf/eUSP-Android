@@ -18,7 +18,8 @@
 
     <item
         android:id="@+id/libraryFragment"
-        android:enabled="true"
+        android:enabled="false"
+        android:visible="false"
         android:icon="@drawable/selector_btm_nav_ic_menu_book"
         android:title="@string/btm_nav_library"/>
 

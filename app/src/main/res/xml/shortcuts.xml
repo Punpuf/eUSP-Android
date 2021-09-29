@@ -10,8 +10,8 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.punpuf.e_bandejao"
-            android:targetClass="com.punpuf.e_bandejao.ui.MainActivity"
+            android:targetPackage="com.punpuf.e_usp"
+            android:targetClass="com.punpuf.e_usp.ui.MainActivity"
             android:data="action_barcode"/>
     </shortcut>
 
@@ -24,8 +24,8 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.punpuf.e_bandejao"
-            android:targetClass="com.punpuf.e_bandejao.ui.MainActivity"
+            android:targetPackage="com.punpuf.e_usp"
+            android:targetClass="com.punpuf.e_usp.ui.MainActivity"
             android:data="action_qrcode"/>
     </shortcut>
 
